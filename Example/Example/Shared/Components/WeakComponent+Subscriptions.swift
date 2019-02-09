@@ -17,8 +17,9 @@ extension WeakComponent {
     }
 
     func unsubscribe() {
-        references.compactMap { $0 as? String }.forEach(store.unsubscribe)
-        debugPrint("Unsubscribe \(self)")
+        let subscriptions = references.compactMap { $0 as? String }
+        subscriptions.forEach(store.unsubscribe)
+        debugPrint("Removed \(subscriptions.count) subscriptions for \(self)")
     }
 }
 
