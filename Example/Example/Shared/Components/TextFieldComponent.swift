@@ -22,8 +22,8 @@ final class TextFieldComponent: Component<UITextField> {
     }
 
     func input(_ keyPath: KeyPath<AppState, String?>) {
-        store.subscribe { [weak self] state in
-            self?.unbox.text = state[keyPath: keyPath]
+        subscribe(keyPath) { [weak self] state in
+            self?.unbox.text = state
         }
     }
 

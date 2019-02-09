@@ -65,6 +65,8 @@
 		83923ADB220F5F5100EE4AB6 /* VideosComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83923ADA220F5F5100EE4AB6 /* VideosComponent.swift */; };
 		83923ADF220F66DC00EE4AB6 /* NavigationControllerComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83923ADE220F66DC00EE4AB6 /* NavigationControllerComponent.swift */; };
 		83923AE1220F6B2B00EE4AB6 /* VideosState.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83923AE0220F6B2B00EE4AB6 /* VideosState.swift */; };
+		83923AE4220F729600EE4AB6 /* Component+Subscriptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83923AE3220F729600EE4AB6 /* Component+Subscriptions.swift */; };
+		83923AE7220F82F900EE4AB6 /* WeakComponent+Subscriptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83923AE6220F82F900EE4AB6 /* WeakComponent+Subscriptions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -167,6 +169,8 @@
 		83923ADA220F5F5100EE4AB6 /* VideosComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideosComponent.swift; sourceTree = "<group>"; };
 		83923ADE220F66DC00EE4AB6 /* NavigationControllerComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationControllerComponent.swift; sourceTree = "<group>"; };
 		83923AE0220F6B2B00EE4AB6 /* VideosState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VideosState.swift; sourceTree = "<group>"; };
+		83923AE3220F729600EE4AB6 /* Component+Subscriptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Component+Subscriptions.swift"; sourceTree = "<group>"; };
+		83923AE6220F82F900EE4AB6 /* WeakComponent+Subscriptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WeakComponent+Subscriptions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -268,6 +272,8 @@
 			children = (
 				83923A65220F0E7000EE4AB6 /* ButtonComponent.swift */,
 				8388F4462207A10000907FD2 /* TextFieldComponent.swift */,
+				83923AE3220F729600EE4AB6 /* Component+Subscriptions.swift */,
+				83923AE6220F82F900EE4AB6 /* WeakComponent+Subscriptions.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -302,14 +308,13 @@
 		83923A9B220F2F5C00EE4AB6 /* Components */ = {
 			isa = PBXGroup;
 			children = (
+				83923AE5220F7F1F00EE4AB6 /* Weak */,
 				83923ACB220F54B700EE4AB6 /* AlertController.swift */,
 				83923ADE220F66DC00EE4AB6 /* NavigationControllerComponent.swift */,
 				83923A69220F287100EE4AB6 /* StackView.swift */,
 				83923AD3220F5D0D00EE4AB6 /* TabBarControllerComponent.swift */,
 				83923AC5220F413C00EE4AB6 /* TableView.swift */,
-				83923AC3220F405100EE4AB6 /* TableViewController.swift */,
 				83923A6B220F288700EE4AB6 /* View.swift */,
-				83923AA9220F366700EE4AB6 /* ViewController.swift */,
 				83923AB3220F39C000EE4AB6 /* Window.swift */,
 			);
 			path = Components;
@@ -388,6 +393,15 @@
 				83923ABF220F3FA800EE4AB6 /* Dependencies */,
 			);
 			path = Shared;
+			sourceTree = "<group>";
+		};
+		83923AE5220F7F1F00EE4AB6 /* Weak */ = {
+			isa = PBXGroup;
+			children = (
+				83923AC3220F405100EE4AB6 /* TableViewController.swift */,
+				83923AA9220F366700EE4AB6 /* ViewController.swift */,
+			);
+			path = Weak;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -558,10 +572,12 @@
 				83923ADB220F5F5100EE4AB6 /* VideosComponent.swift in Sources */,
 				8365E1B82203909B00074C21 /* AppStore.swift in Sources */,
 				8365E1B62203901B00074C21 /* AppInterpreter.swift in Sources */,
+				83923AE7220F82F900EE4AB6 /* WeakComponent+Subscriptions.swift in Sources */,
 				8365E1AA22038E8600074C21 /* AppState.swift in Sources */,
 				8365E1B222038F7A00074C21 /* AppEffect.swift in Sources */,
 				8365E12E2203839400074C21 /* AppDelegate.swift in Sources */,
 				83923AC2220F403200EE4AB6 /* AccountComponent.swift in Sources */,
+				83923AE4220F729600EE4AB6 /* Component+Subscriptions.swift in Sources */,
 				83923AB1220F378C00EE4AB6 /* LoginState.swift in Sources */,
 				83923AB9220F3C9F00EE4AB6 /* ButtonComponent.swift in Sources */,
 			);

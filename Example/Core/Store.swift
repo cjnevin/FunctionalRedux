@@ -2,11 +2,11 @@ import Foundation
 
 public final class Store<S, A, E: Monoid> {
     private let reducer: Reducer<S, A, E>
-    private var subscribers: [(S) -> Void] = []
+    private var subscribers: [String: (S) -> Void] = [:]
     private var interpreter: (S, E) -> Future<[A]>
     private var currentState: S {
         didSet {
-            self.subscribers.forEach { $0(self.currentState) }
+            self.subscribers.values.forEach { $0(self.currentState) }
         }
     }
     
@@ -25,8 +25,14 @@ public final class Store<S, A, E: Monoid> {
         }
     }
     
-    public func subscribe(_ subscriber: @escaping (S) -> Void) {
-        self.subscribers.append(subscriber)
+    public func subscribe(_ subscriber: @escaping (S) -> Void) -> String {
+        let token = UUID().uuidString
+        subscribers[token] = subscriber
         subscriber(self.currentState)
+        return token
+    }
+
+    public func unsubscribe(_ token: String) {
+        subscribers.removeValue(forKey: token)
     }
 }

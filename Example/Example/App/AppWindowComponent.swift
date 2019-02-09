@@ -10,7 +10,9 @@ import Render
 import UIKit
 
 final class AppWindowComponent: WindowComponent {
-    func setup() {
+    public convenience init() {
+        self.init(UIWindow(frame: UIScreen.main.bounds))
+
         let videos = VideosComponent.navigationComponent(style: .grouped)
         let account = AccountComponent.navigationComponent(style: .plain)
         let tabBar = TabBarControllerComponent([videos.downcast(), account.downcast()])

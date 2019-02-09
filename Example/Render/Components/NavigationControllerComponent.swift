@@ -17,6 +17,12 @@ extension Component where T: UINavigationController {
         unbox.pushViewController(component.unbox, animated: animated)
     }
 
+    public func push<U: UIViewController>(_ component: WeakComponent<U>, animated: Bool = true) {
+        component.unbox.map {
+            unbox.pushViewController($0, animated: animated)
+        }
+    }
+
     public func pop(animated: Bool = true) {
         unbox.popViewController(animated: animated)
     }

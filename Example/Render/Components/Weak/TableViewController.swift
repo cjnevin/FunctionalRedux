@@ -9,10 +9,10 @@
 import UIKit
 
 open class TableViewController: UITableViewController {
-    private let componentType: Component<TableViewController>.Type
-    private var component: Component<TableViewController>!
+    private let componentType: WeakComponent<TableViewController>.Type
+    private var component: WeakComponent<TableViewController>!
 
-    public init(_ componentType: Component<TableViewController>.Type, style: UITableView.Style) {
+    public init(_ componentType: WeakComponent<TableViewController>.Type, style: UITableView.Style) {
         self.componentType = componentType
         super.init(style: style)
     }
@@ -27,7 +27,7 @@ open class TableViewController: UITableViewController {
     }
 }
 
-extension Component where T == TableViewController {
+extension WeakComponent where T == TableViewController {
     public static func tableViewController(style: UITableView.Style) -> TableViewController {
         return TableViewController(self, style: style)
     }
@@ -41,31 +41,31 @@ extension Component where T == TableViewController {
     }
 }
 
-extension Component where T: TableViewController {
+extension WeakComponent where T: TableViewController {
     public func register<T: Reusable & UITableViewCell>(_ type: T.Type) {
-        unbox.tableView.register(type)
+        unbox?.tableView.register(type)
     }
 
     public func dequeue<T: Reusable & UITableViewCell>(_ type: T.Type) -> T? {
-        return unbox.tableView.dequeue(type)
+        return unbox?.tableView.dequeue(type)
     }
 
-    public func dequeue<T: Reusable & UITableViewCell>(_ type: T.Type, for indexPath: IndexPath) -> T {
-        return unbox.tableView.dequeue(type, for: indexPath)
+    public func dequeue<T: Reusable & UITableViewCell>(_ type: T.Type, for indexPath: IndexPath) -> T? {
+        return unbox?.tableView.dequeue(type, for: indexPath)
     }
 }
 
-extension Component where T: TableViewController {
+extension WeakComponent where T: TableViewController {
     public func setDataSource(_ dataSource: UITableViewDataSource) {
-        unbox.tableView.dataSource = dataSource
+        unbox?.tableView.dataSource = dataSource
     }
 
     public func setDelegate(_ delegate: UITableViewDelegate) {
-        unbox.tableView.delegate = delegate
+        unbox?.tableView.delegate = delegate
     }
 
     public func reloadData() {
-        unbox.tableView.reloadData()
+        unbox?.tableView.reloadData()
     }
 }
 
@@ -78,7 +78,7 @@ public struct TableViewSection<T> {
     }
 }
 
-open class TableViewControllerComponent<T>: Component<TableViewController>, UITableViewDataSource, UITableViewDelegate {
+open class TableViewControllerComponent<T>: WeakComponent<TableViewController>, UITableViewDataSource, UITableViewDelegate {
     public var sections: [TableViewSection<T>] = [] {
         didSet { reloadData() }
     }

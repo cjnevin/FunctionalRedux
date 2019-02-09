@@ -12,10 +12,10 @@ import UIKit
 final class AccountComponent: TableViewControllerComponent<AccountItem> {
     required init(_ value: TableViewController) {
         super.init(value)
-        unbox.title = "Account"
+        unbox?.title = "Account"
         register(SwitchCell.self)
         register(TextCell.self)
-        store.subscribe(keyPath: \AppState.accountState.sections) { [weak self] sections in
+        subscribe(\AppState.accountState.sections) { [weak self] sections in
             self?.sections = sections
         }
     }

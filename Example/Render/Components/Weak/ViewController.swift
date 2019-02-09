@@ -9,10 +9,10 @@
 import UIKit
 
 open class ViewController: UIViewController {
-    private let componentType: Component<ViewController>.Type
-    private var component: Component<ViewController>!
+    private let componentType: WeakComponent<ViewController>.Type
+    private var component: WeakComponent<ViewController>?
 
-    public init(_ componentType: Component<ViewController>.Type) {
+    public init(_ componentType: WeakComponent<ViewController>.Type) {
         self.componentType = componentType
         super.init(nibName: nil, bundle: nil)
     }
@@ -21,13 +21,13 @@ open class ViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
 
-    override open func viewDidLoad() {
+    open override func viewDidLoad() {
         super.viewDidLoad()
         component = componentType.init(self)
     }
 }
 
-extension Component where T == ViewController {
+extension WeakComponent where T == ViewController {
     public static func viewController() -> ViewController {
         return ViewController(self)
     }
@@ -41,13 +41,25 @@ extension Component where T == ViewController {
     }
 }
 
-extension Component where T: UIViewController {
-    public func present<U: UIViewController>(_ component: Component<U>, animated: Bool = true) {
-        unbox.present(component.unbox, animated: animated, completion: nil)
+extension WeakComponent where T: UIViewController {
+    public func present<U: UIViewController>(_ component: WeakComponent<U>, animated: Bool = true) {
+        component.unbox.map {
+            self.unbox?.present($0, animated: animated, completion: nil)
+        }
     }
 
-    public func dismiss(animated: Bool = true) {
-        unbox.dismiss(animated: animated, completion: nil)
+    public func present<U: UIViewController>(_ component: Component<U>, animated: Bool = true) {
+        unbox?.present(component.unbox, animated: animated, completion: nil)
+    }
+
+    public func dismiss(animated: Bool = true, completion: (() -> Void)? = nil) {
+        unbox?.dismiss(animated: animated, completion: completion)
+    }
+}
+
+extension WeakComponent where T: UIViewController {
+    public func downcast() -> WeakComponent<UIViewController>? {
+        return unbox.map(WeakComponent<UIViewController>.init)
     }
 }
 
@@ -55,4 +67,8 @@ extension Component where T: UIViewController {
     public func downcast() -> Component<UIViewController> {
         return Component<UIViewController>(unbox)
     }
+}
+
+open class ViewControllerComponent: WeakComponent<ViewController> {
+
 }

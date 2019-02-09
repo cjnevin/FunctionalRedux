@@ -20,8 +20,8 @@ final class ButtonComponent: Component<UIButton> {
     }
 
     func isEnabled(_ keyPath: KeyPath<AppState, Bool>) {
-        store.subscribe { [weak self] state in
-            self?.unbox.isEnabled = state[keyPath: keyPath]
+        subscribe(keyPath) { [weak self] state in
+            self?.unbox.isEnabled = state
         }
     }
 

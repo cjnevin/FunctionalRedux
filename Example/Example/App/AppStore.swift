@@ -29,10 +29,3 @@ let store = Store<AppState, AppAction, AppEffect>(
     interpreter: appInterpreter(Dependencies())
 )
 
-extension Store {
-    func subscribe<T>(keyPath: KeyPath<AppState, T>, callback: @escaping (T) -> Void) {
-        store.subscribe { state in
-            callback(state[keyPath: keyPath])
-        }
-    }
-}

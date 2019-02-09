@@ -9,24 +9,24 @@
 import Render
 import UIKit
 
-final class LoginComponent: Component<ViewController> {
+final class LoginComponent: ViewControllerComponent {
     private lazy var email = TextFieldComponent {
         $0.apply(style: Styles.emailStyle)
         $0.input(\AppState.accountState.loginState.email)
         $0.setOnChange { AppAction.loginAction(.setEmail($0)) }
-        $0.setOnReturn { [unowned self] in self.password.unbox.becomeFirstResponder() }
+        $0.setOnReturn { [weak self] in self?.password.unbox.becomeFirstResponder() }
     }
     private lazy var password = TextFieldComponent {
         $0.apply(style: Styles.passwordStyle)
         $0.input(\AppState.accountState.loginState.password)
         $0.setOnChange { AppAction.loginAction(.setPassword($0)) }
-        $0.setOnReturn { [unowned self] in self.submit.onTapEvent() }
+        $0.setOnReturn { [weak self] in self?.submit.onTapEvent() }
     }
     private lazy var submit = ButtonComponent {
         $0.apply(style: Styles.submitStyle)
         $0.isEnabled(\AppState.accountState.loginState.canLogIn)
-        $0.setOnTap { [unowned self] in
-            self.stackView.resignFirstResponders()
+        $0.setOnTap { [weak self] in
+            self?.stackView.resignFirstResponders()
             return AppAction.loginAction(LoginAction.logIn)
         }
     }
@@ -41,21 +41,28 @@ final class LoginComponent: Component<ViewController> {
 
     required init(_ value: ViewController) {
         super.init(value)
-        unbox.title = "Login"
-        unbox.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(onCancel))
+        unbox?.title = "Login"
+        unbox?.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(onCancel))
         apply(style: Styles.whiteViewStyle.promote())
-        view.addSubview(stackView, constraints: [
+        view?.addSubview(stackView, constraints: [
             equalTopSafeArea(offset: 20),
             equalLeading(offset: 20),
             equalTrailing(offset: -20)])
-        store.subscribe(keyPath: \AppState.accountState.loggedInUser) { [weak self] user in
+        subscribe(\AppState.accountState.loggedInUser) { [weak self] user in
             if user != nil {
-                self?.dismiss()
+                self?.clearPasswordAndDismiss()
             }
         }
     }
 
     @objc private func onCancel() {
-        dismiss()
+        clearPasswordAndDismiss()
+    }
+
+    private func clearPasswordAndDismiss() {
+        stackView.resignFirstResponders()
+        dismiss {
+            store.dispatch(.loginAction(.setPassword(nil)))
+        }
     }
 }

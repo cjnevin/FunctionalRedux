@@ -12,9 +12,9 @@ import UIKit
 final class VideosComponent: TableViewControllerComponent<Video> {
     required init(_ value: TableViewController) {
         super.init(value)
-        unbox.title = "Videos"
+        unbox?.title = "Videos"
         register(TextCell.self)
-        store.subscribe(keyPath: \AppState.sections) { [weak self] sections in
+        subscribe(\AppState.sections) { [weak self] sections in
             self?.sections = sections
         }
     }

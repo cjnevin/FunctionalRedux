@@ -8,11 +8,33 @@
 
 import Foundation
 
+public protocol Deallocatable {
+    func deallocate()
+}
+
 open class Component<T: AnyObject>: NSObject {
     private(set) public var unbox: T
+    public var references: [Any] = []
 
     public required init(_ value: T) {
         self.unbox = value
+    }
+
+    deinit {
+        (self as? Deallocatable)?.deallocate()
+    }
+}
+
+open class WeakComponent<T: AnyObject>: NSObject {
+    private(set) public weak var unbox: T?
+    public var references: [Any] = []
+
+    public required init(_ value: T) {
+        self.unbox = value
+    }
+
+    deinit {
+        (self as? Deallocatable)?.deallocate()
     }
 }
 
@@ -22,9 +44,15 @@ extension Component {
     }
 }
 
-extension Component where T: UIViewController {
-    public var view: Component<UIView> {
-        return Component<UIView>(unbox.view!)
+extension WeakComponent {
+    public func apply(style: Style<T>) {
+        unbox.map(style.apply)
+    }
+}
+
+extension WeakComponent where T: UIViewController {
+    public var view: Component<UIView>? {
+        return unbox.map { Component<UIView>($0.view) }
     }
 }
 

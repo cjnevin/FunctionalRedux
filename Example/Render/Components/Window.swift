@@ -13,10 +13,6 @@ open class WindowComponent: Component<UIWindow> {
         didSet { root.map(setRoot) }
     }
 
-    public convenience init() {
-        self.init(UIWindow(frame: UIScreen.main.bounds))
-    }
-
     func setRoot<T: UIViewController>(_ component: Component<T>) {
         unbox.rootViewController = component.unbox
         if !unbox.isKeyWindow {
