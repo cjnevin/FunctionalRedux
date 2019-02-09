@@ -10,6 +10,12 @@ import Foundation
 import Render
 
 extension Component {
+    func subscribe(_ callback: @escaping (AppState) -> Void) {
+        references.append(store.subscribe { state in
+            callback(state)
+        })
+    }
+
     func subscribe<U>(_ keyPath: KeyPath<AppState, U>, callback: @escaping (U) -> Void) {
         references.append(store.subscribe { state in
             callback(state[keyPath: keyPath])

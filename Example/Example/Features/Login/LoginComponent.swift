@@ -12,22 +12,22 @@ import UIKit
 final class LoginComponent: ViewControllerComponent {
     private lazy var email = TextFieldComponent {
         $0.apply(style: Styles.emailStyle)
-        $0.input(\AppState.accountState.loginState.email)
-        $0.setOnChange { AppAction.loginAction(.setEmail($0)) }
+        $0.input(\.accountState.loginState.email)
+        $0.setOnChange { .loginAction(.setEmail($0)) }
         $0.setOnReturn { [weak self] in self?.password.unbox.becomeFirstResponder() }
     }
     private lazy var password = TextFieldComponent {
         $0.apply(style: Styles.passwordStyle)
-        $0.input(\AppState.accountState.loginState.password)
-        $0.setOnChange { AppAction.loginAction(.setPassword($0)) }
+        $0.input(\.accountState.loginState.password)
+        $0.setOnChange { .loginAction(.setPassword($0)) }
         $0.setOnReturn { [weak self] in self?.submit.onTapEvent() }
     }
     private lazy var submit = ButtonComponent {
         $0.apply(style: Styles.submitStyle)
-        $0.isEnabled(\AppState.accountState.loginState.canLogIn)
+        $0.isEnabled(\.accountState.loginState.canLogIn)
         $0.setOnTap { [weak self] in
             self?.stackView.resignFirstResponders()
-            return AppAction.loginAction(LoginAction.logIn)
+            return .loginAction(LoginAction.logIn)
         }
     }
     private lazy var stackView: Component<UIStackView> = {
@@ -48,7 +48,7 @@ final class LoginComponent: ViewControllerComponent {
             equalTopSafeArea(offset: 20),
             equalLeading(offset: 20),
             equalTrailing(offset: -20)])
-        subscribe(\AppState.accountState.loggedInUser) { [weak self] user in
+        subscribe(\.accountState.loggedInUser) { [weak self] user in
             if user != nil {
                 self?.clearPasswordAndDismiss()
             }
