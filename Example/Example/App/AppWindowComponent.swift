@@ -12,13 +12,6 @@ import UIKit
 final class AppWindowComponent: WindowComponent {
     public convenience init() {
         self.init(UIWindow(frame: UIScreen.main.bounds))
-
-        let videos = VideosComponent.navigationComponent(style: .grouped)
-        let account = AccountComponent.navigationComponent(style: .plain)
-        let tabBar = TabBarControllerComponent([videos.downcast(), account.downcast()])
-        tabBar.unbox.tabBar.items?.first?.title = "Videos"
-        tabBar.unbox.tabBar.items?.last?.title = "Account"
-        apply(style: Styles.whiteViewStyle.promote())
-        root = tabBar.downcast()
+        root = AppTabBarControllerComponent().downcast()
     }
 }
