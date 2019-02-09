@@ -10,14 +10,11 @@ import Core
 import UIKit
 
 extension Styles {
-    public static let buttonStyle = Style<UIButton> {
-        (borderStyle <> cornerStyle).apply(to: $0.layer)
-        $0.setTitleColor(.gray, for: .disabled)
-        $0.setTitleColor(.black, for: .normal)
-        $0.backgroundColor = UIColor.lightGray
+    public static func title(_ text: String?, for state: UIControl.State = .normal) -> Style<UIButton> {
+        return .init { $0.setTitle(text, for: state) }
     }
 
-    public static let submitStyle = buttonStyle <> Style<UIButton> {
-        $0.setTitle("Submit", for: .normal)
+    public static func titleColor(_ color: UIColor, for state: UIControl.State = .normal) -> Style<UIButton> {
+        return .init { $0.setTitleColor(color, for: state) }
     }
 }

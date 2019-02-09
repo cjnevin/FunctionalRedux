@@ -10,23 +10,27 @@ import Core
 import UIKit
 
 extension Styles {
-    public static let textStyle = Style<UITextField> {
-        (borderStyle <> cornerStyle).apply(to: $0.layer)
+    public static func returnKey(_ key: UIReturnKeyType) -> Style<UITextField> {
+        return .init { $0.returnKeyType = key }
     }
 
-    public static let emailStyle = textStyle <> Style<UITextField> {
-        $0.placeholder = "Enter email"
-        $0.returnKeyType = .next
-        $0.autocapitalizationType = .none
-        $0.autocorrectionType = .no
-        $0.keyboardType = .emailAddress
+    public static func keyboard(_ type: UIKeyboardType) -> Style<UITextField> {
+        return .init { $0.keyboardType = type }
     }
 
-    public static let passwordStyle = textStyle <> Style<UITextField> {
-        $0.placeholder = "Enter password"
-        $0.returnKeyType = .go
-        $0.autocapitalizationType = .none
-        $0.autocorrectionType = .no
+    public static func capitalization(_ value: UITextAutocapitalizationType) -> Style<UITextField> {
+        return .init { $0.autocapitalizationType = value }
+    }
+
+    public static func correction(_ value: UITextAutocorrectionType) -> Style<UITextField> {
+        return .init { $0.autocorrectionType = value }
+    }
+
+    public static func placeholder(_ text: String?) -> Style<UITextField> {
+        return .init { $0.placeholder = text }
+    }
+
+    public static let secure = Style<UITextField> {
         $0.isSecureTextEntry = true
     }
 }

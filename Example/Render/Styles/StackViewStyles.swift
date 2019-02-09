@@ -9,8 +9,11 @@
 import UIKit
 
 extension Styles {
-    public static let verticalStackStyle = Style<UIStackView> {
-        $0.axis = .vertical
-        $0.spacing = 20
+    public static func axis(_ value: NSLayoutConstraint.Axis) -> Style<UIStackView> {
+        return .init { $0.axis = value }
+    }
+
+    public static func spacing(_ value: CGFloat) -> Style<UIStackView> {
+        return .init { $0.spacing = value }
     }
 }

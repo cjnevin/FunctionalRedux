@@ -43,3 +43,15 @@ extension Style where T == UIView {
         }
     }
 }
+
+extension Style where T == CALayer {
+    public func promote<U: UIView>() -> Style<U> {
+        return .init { self.apply(to: $0.layer) }
+    }
+}
+
+extension Style {
+    public func cast<U: UIView>() -> Style<U> {
+        return .init { self.apply(to: $0 as! T) }
+    }
+}

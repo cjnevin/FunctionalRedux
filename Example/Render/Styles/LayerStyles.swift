@@ -9,12 +9,15 @@
 import UIKit
 
 extension Styles {
-    public static let borderStyle = Style<CALayer> {
-        $0.borderColor = UIColor.black.cgColor
-        $0.borderWidth = 0.5
+    public static func border(width: CGFloat) -> Style<CALayer> {
+        return .init { $0.borderWidth = width }
     }
 
-    public static let cornerStyle = Style<CALayer> {
-        $0.cornerRadius = 4
+    public static func border(color: UIColor) -> Style<CALayer> {
+        return .init { $0.borderColor = color.cgColor }
+    }
+
+    public static func corner(radius: CGFloat) -> Style<CALayer> {
+        return .init { $0.cornerRadius = radius }
     }
 }

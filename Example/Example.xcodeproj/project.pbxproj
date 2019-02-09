@@ -68,6 +68,7 @@
 		83923AE4220F729600EE4AB6 /* Component+Subscriptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83923AE3220F729600EE4AB6 /* Component+Subscriptions.swift */; };
 		83923AE7220F82F900EE4AB6 /* WeakComponent+Subscriptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83923AE6220F82F900EE4AB6 /* WeakComponent+Subscriptions.swift */; };
 		83923AE9220F8F2400EE4AB6 /* AppTabBarComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83923AE8220F8F2400EE4AB6 /* AppTabBarComponent.swift */; };
+		83923AEC220F933B00EE4AB6 /* AppStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83923AEB220F933B00EE4AB6 /* AppStyles.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -173,6 +174,7 @@
 		83923AE3220F729600EE4AB6 /* Component+Subscriptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Component+Subscriptions.swift"; sourceTree = "<group>"; };
 		83923AE6220F82F900EE4AB6 /* WeakComponent+Subscriptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WeakComponent+Subscriptions.swift"; sourceTree = "<group>"; };
 		83923AE8220F8F2400EE4AB6 /* AppTabBarComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTabBarComponent.swift; sourceTree = "<group>"; };
+		83923AEB220F933B00EE4AB6 /* AppStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStyles.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -391,6 +393,7 @@
 		83923AE2220F6B5000EE4AB6 /* Shared */ = {
 			isa = PBXGroup;
 			children = (
+				83923AEA220F932D00EE4AB6 /* Styles */,
 				83923ACD220F59C800EE4AB6 /* Cells */,
 				8388F4452207A0F200907FD2 /* Components */,
 				83923ABF220F3FA800EE4AB6 /* Dependencies */,
@@ -405,6 +408,14 @@
 				83923AA9220F366700EE4AB6 /* ViewController.swift */,
 			);
 			path = Weak;
+			sourceTree = "<group>";
+		};
+		83923AEA220F932D00EE4AB6 /* Styles */ = {
+			isa = PBXGroup;
+			children = (
+				83923AEB220F933B00EE4AB6 /* AppStyles.swift */,
+			);
+			path = Styles;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -576,6 +587,7 @@
 				8365E1B82203909B00074C21 /* AppStore.swift in Sources */,
 				8365E1B62203901B00074C21 /* AppInterpreter.swift in Sources */,
 				83923AE7220F82F900EE4AB6 /* WeakComponent+Subscriptions.swift in Sources */,
+				83923AEC220F933B00EE4AB6 /* AppStyles.swift in Sources */,
 				8365E1AA22038E8600074C21 /* AppState.swift in Sources */,
 				8365E1B222038F7A00074C21 /* AppEffect.swift in Sources */,
 				8365E12E2203839400074C21 /* AppDelegate.swift in Sources */,

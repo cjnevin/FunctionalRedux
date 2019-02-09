@@ -9,7 +9,7 @@
 import UIKit
 
 extension Styles {
-    public static let whiteViewStyle = Style<UIView> {
-        $0.backgroundColor = .white
+    public static func background(_ color: UIColor) -> Style<UIView> {
+        return .init { $0.backgroundColor = color }
     }
 }
