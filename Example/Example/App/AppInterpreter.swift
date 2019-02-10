@@ -9,28 +9,31 @@
 import Core
 import Foundation
 
-func appInterpreter(_ deps: Dependencies) -> (AppState, AppEffect) -> Future<[AppAction]> {
-    return { state, effect in
-        switch effect {
-        case let .sequence(effects):
-            return effects.reduce(pure(.identity)) { result, sideEffect in
-                zip(result, appInterpreter(deps)(state, sideEffect)).flatMap { a, b in
-                    pure(a + b)
+func appInterpreter(_ deps: Dependencies) -> (@escaping () -> AppState, AppEffect) -> (@escaping (AppAction) -> Void) -> Void {
+    return { getState, effect in
+        return { callback in
+            switch effect {
+            case let .sequence(effects):
+                effects.forEach { e in
+                    appInterpreter(deps)(getState, e)(callback)
                 }
+            case let .delay(effect, delay):
+                DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+                    appInterpreter(deps)(getState, effect)(callback)
+                }
+            case let .action(action):
+                callback(action)
+            case let .api(endpoint):
+                deps.request(endpoint.request).map(endpoint.actions).onResult { (actions) in
+                    actions.forEach(callback)
+                }
+            case let .log(text):
+                print("[Logger] \(text)")
+            case let .track(event):
+                deps.track(event)
+            case .save:
+                deps.store.set(getState())
             }
-        case let .delay(effect, delay):
-            return appInterpreter(deps)(state, effect).flatMap { delayed($0, delay: delay) }
-        case let .action(action):
-            return pure([action])
-        case let .api(endpoint):
-            return deps.request(endpoint.request).map(endpoint.actions)
-        case let .log(text):
-            print("[Logger] \(text)")
-        case let .track(event):
-            deps.track(event)
-        case .save:
-            deps.store.set(state)
         }
-        return pure(.identity)
     }
 }
