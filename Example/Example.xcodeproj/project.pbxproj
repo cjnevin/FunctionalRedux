@@ -72,7 +72,6 @@
 		83923AF02210221B00EE4AB6 /* CGSize+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83923AEF2210221B00EE4AB6 /* CGSize+Extensions.swift */; };
 		83923AF3221026C400EE4AB6 /* LoadingComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83923AF2221026C400EE4AB6 /* LoadingComponent.swift */; };
 		83923AF522102E7E00EE4AB6 /* VisualEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83923AF422102E7E00EE4AB6 /* VisualEffectView.swift */; };
-		83923AF72210352600EE4AB6 /* WeakComponent+Subscriptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83923AF62210352600EE4AB6 /* WeakComponent+Subscriptions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -182,7 +181,6 @@
 		83923AEF2210221B00EE4AB6 /* CGSize+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGSize+Extensions.swift"; sourceTree = "<group>"; };
 		83923AF2221026C400EE4AB6 /* LoadingComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingComponent.swift; sourceTree = "<group>"; };
 		83923AF422102E7E00EE4AB6 /* VisualEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualEffectView.swift; sourceTree = "<group>"; };
-		83923AF62210352600EE4AB6 /* WeakComponent+Subscriptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WeakComponent+Subscriptions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -288,7 +286,6 @@
 				83923AF2221026C400EE4AB6 /* LoadingComponent.swift */,
 				8388F4462207A10000907FD2 /* TextFieldComponent.swift */,
 				83923AE3220F729600EE4AB6 /* Component+Subscriptions.swift */,
-				83923AF62210352600EE4AB6 /* WeakComponent+Subscriptions.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -602,7 +599,6 @@
 				83923AC8220F439200EE4AB6 /* AccountState.swift in Sources */,
 				83923A82220F2B8500EE4AB6 /* LoginComponent.swift in Sources */,
 				83923AD1220F59E800EE4AB6 /* SwitchCell.swift in Sources */,
-				83923AF72210352600EE4AB6 /* WeakComponent+Subscriptions.swift in Sources */,
 				83923AE1220F6B2B00EE4AB6 /* VideosState.swift in Sources */,
 				83923ADB220F5F5100EE4AB6 /* VideosComponent.swift in Sources */,
 				83923AF3221026C400EE4AB6 /* LoadingComponent.swift in Sources */,

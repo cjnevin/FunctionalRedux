@@ -2,10 +2,12 @@ import Foundation
 
 public final class Store<S, A, E: Monoid> {
     public typealias Interpreter = (@escaping () -> S, E, @escaping (A) -> Void) -> Void
+    public typealias Token = Int
 
     private let reducer: Reducer<S, A, E>
-    private var subscribers: [String: (S) -> Void] = [:]
+    private var subscribers: [Token: (S) -> Void] = [:]
     private var interpreter: Interpreter
+    private var token = (0...).makeIterator()
 
     private var currentState: S {
         didSet {
@@ -25,14 +27,14 @@ public final class Store<S, A, E: Monoid> {
         self.interpreter({ self.currentState }, effect, dispatch)
     }
     
-    public func subscribe(_ subscriber: @escaping (S) -> Void) -> String {
-        let token = UUID().uuidString
-        subscribers[token] = subscriber
+    public func subscribe(_ subscriber: @escaping (S) -> Void) -> Token {
+        let tkn = token.next()!
+        subscribers[tkn] = subscriber
         subscriber(self.currentState)
-        return token
+        return tkn
     }
 
-    public func unsubscribe(_ token: String) {
+    public func unsubscribe(_ token: Token) {
         subscribers.removeValue(forKey: token)
     }
 }
