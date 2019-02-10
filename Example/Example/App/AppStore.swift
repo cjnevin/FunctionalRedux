@@ -9,11 +9,13 @@
 import Foundation
 import Core
 
-let store = Store<AppState, AppAction, AppEffect>(
+let store = AppStore(
     reducer: appReducer,
     initialState: dependencies.store.get() ?? getDefaultState(),
     interpreter: appInterpreter(dependencies)
 )
+
+typealias AppStore = Store<AppState, AppAction, AppEffect>
 
 private let dependencies = Dependencies()
 
