@@ -15,9 +15,13 @@ struct User: Codable {
 }
 
 enum LoginAction {
+    case revealPassword(Bool)
     case setEmail(String?)
     case setPassword(String?)
+    case resetFailed
     case logIn
+    case loginFailed
+    case loggedIn(User)
 }
 
 struct LoginState: Codable {
@@ -26,6 +30,9 @@ struct LoginState: Codable {
     }
     var email: String?
     var password: String?
+    var revealed: Bool = false
+    var pending: Bool = false
+    var failed: Bool = false
     var canLogIn: Bool { return fields.lazy.map { $0.isNotEmpty }.reduce(true, <>) }
 
     private var fields: [String?] {
@@ -35,6 +42,9 @@ struct LoginState: Codable {
 
 let loginReducer = Reducer<LoginState, LoginAction, AppEffect> { state, action in
     switch action {
+    case let .revealPassword(revealed):
+        state.revealed = revealed
+        return .identity
     case let .setEmail(email):
         state.email = email
         return .log(email.map { "Set email to: \($0)" } ?? "Cleared email")
@@ -43,12 +53,37 @@ let loginReducer = Reducer<LoginState, LoginAction, AppEffect> { state, action i
         state.password = password
         return .log(password.map { "Set password to: \($0)" } ?? "Cleared password")
             <> .save
+    case .resetFailed:
+        state.failed = false
+        return .identity
+    case .loginFailed:
+        state.failed = true
+        state.pending = false
+        return .log("Log in failed")
+    case .loggedIn:
+        state.pending = false
+        return .identity
     case .logIn:
         guard state.canLogIn, let email = state.email, let password = state.password else {
             return .identity
         }
-        return .log("Logging in")
-            <> .track(.accountEvent(.logInPressed))
-            <> .api(.logIn(email: email, password: password))
+        state.failed = false
+        state.pending = true
+        let effects: AppEffect = .log("Logging in") <> .track(.accountEvent(.logInPressed))
+        // Hack to test both routes...
+        if state.revealed == true {
+            return effects <> .api(.logInFailureTest)
+        } else {
+            return effects <> .api(.logIn(email: email, password: password))
+        }
+    }
+}
+
+extension Result where E == ApiError, A == Data {
+    func handleLogin() -> [AppAction] {
+        guard case let .success(data) = self, let user = try? JSONDecoder().decode(User.self, from: data) else {
+            return [.loginAction(.loginFailed)]
+        }
+        return [.loginAction(.loggedIn(user))]
     }
 }

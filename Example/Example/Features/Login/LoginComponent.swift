@@ -6,6 +6,7 @@
 //  Copyright © 2019 CJNevin. All rights reserved.
 //
 
+import Core
 import Render
 import UIKit
 
@@ -33,11 +34,12 @@ final class LoginComponent: ViewControllerComponent {
     private lazy var stackView: Component<UIStackView> = {
         let stack = Component(UIStackView())
         stack.apply(style: Styles.verticalStackStyle)
-        stack.addSubview(email, constraint: height(equalTo: 44))
-        stack.addSubview(password, constraint: height(equalTo: 44))
-        stack.addSubview(submit, constraint: height(equalTo: 60))
+        stack.addSubview(email, constraints: height(equalTo: 44))
+        stack.addSubview(password, constraints: height(equalTo: 44))
+        stack.addSubview(submit, constraints: height(equalTo: 60))
         return stack
     }()
+    private lazy var loadingView = LoadingComponent()
 
     required init(_ value: ViewController) {
         super.init(value)
@@ -47,10 +49,8 @@ final class LoginComponent: ViewControllerComponent {
         value.onViewDidDisappear = { [weak self] _ in self?.unsubscribe() }
 
         apply(style: Styles.whiteViewStyle.promote())
-        view?.addSubview(stackView, constraints: [
-            equalTopSafeArea(offset: 20),
-            equalLeading(offset: 20),
-            equalTrailing(offset: -20)])
+        view?.addSubview(stackView, constraints: equalTopSafeArea(offset: 20) <> equalHorizontalEdges(offset: 20))
+        view?.addSubview(loadingView, constraints: equalEdges())
     }
 
     private func subscribe() {
@@ -58,6 +58,25 @@ final class LoginComponent: ViewControllerComponent {
             if user != nil {
                 self?.clearPasswordAndDismiss()
             }
+        }
+        subscribe(\AppState.accountState.loginState.revealed) { [weak self] revealed in
+            guard let image = UIImage(named: revealed ? "crossed-eye" : "eye") else {
+                assertionFailure("Missing image")
+                return
+            }
+            self?.password.apply(style: Styles.isSecure(!revealed))
+            self?.password.setAccessory(image: image) {
+                return AppAction.loginAction(.revealPassword(!revealed))
+            }
+        }
+        subscribe(\AppState.accountState.loginState.pending) { [weak self] loading in
+            self?.loadingView.isLoading = loading
+        }
+        subscribe(\AppState.accountState.loginState.failed) { [weak self] failed in
+            guard failed else { return }
+            self?.present(AlertComponent(alert: .loginFailed {
+                store.dispatch(AppAction.loginAction(.resetFailed))
+            }))
         }
     }
 
@@ -70,5 +89,19 @@ final class LoginComponent: ViewControllerComponent {
         dismiss {
             store.dispatch(.loginAction(.setPassword(nil)))
         }
+    }
+}
+
+// MARK: - Alert
+
+private extension Alert {
+    static func loginFailed(_ callback: @escaping () -> Void) -> Alert {
+        return Alert("Login Failed", message: "Something went wrong", style: .alert, buttons: [.ok(callback)])
+    }
+}
+
+private extension Alert.Button {
+    static func ok(_ callback: @escaping () -> Void) -> Alert.Button {
+        return .init("OK", style: .cancel, callback: callback)
     }
 }

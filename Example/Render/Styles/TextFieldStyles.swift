@@ -30,7 +30,10 @@ extension Styles {
         return .init { $0.placeholder = text }
     }
 
-    public static let secure = Style<UITextField> {
-        $0.isSecureTextEntry = true
+    public static let secure = isSecure(true)
+    public static let unsecure = isSecure(false)
+
+    public static func isSecure(_ secure: Bool) -> Style<UITextField> {
+        return .init { $0.isSecureTextEntry = secure }
     }
 }

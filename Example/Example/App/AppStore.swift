@@ -26,7 +26,11 @@ private func getDefaultState() -> AppState {
             videos: [video1, video2, video3]
         ),
         accountState: AccountState(
-            loginState: .init(email: nil, password: nil),
+            loginState: .init(email: nil,
+                              password: nil,
+                              revealed: false,
+                              pending: false,
+                              failed: false),
             loggedInUser: nil,
             settings: .init(notificationsOn: false)
         ),

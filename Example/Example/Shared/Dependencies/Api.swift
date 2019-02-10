@@ -31,6 +31,9 @@ struct ApiConfiguration {
 
 func createApi(with configuration: ApiConfiguration) -> (ApiRequest) -> Future<ApiResponse> {
     return { request in
+        if request.parameters.keys.contains("fail") {
+            return delayed(.failure(ApiError.invalidData))
+        }
         let user = User(id: 500, name: "TestUser")
         let encoded = try! JSONEncoder().encode(user)
         return delayed(.success(encoded))
@@ -39,17 +42,21 @@ func createApi(with configuration: ApiConfiguration) -> (ApiRequest) -> Future<A
 
 enum ApiEndpoint {
     case logIn(email: String, password: String)
-    
+    case logInFailureTest
+
     var request: ApiRequest {
         switch self {
         case let .logIn(email, password):
             return ApiRequest(method: .post, parameters: ["email": email, "password": password])
+        case .logInFailureTest:
+            return ApiRequest(method: .post, parameters: ["fail": "true"])
         }
     }
     
     func actions(for response: ApiResponse) -> [AppAction] {
         switch self {
         case .logIn: return response.handleLogin()
+        case .logInFailureTest: return response.handleLogin()
         }
     }
 }

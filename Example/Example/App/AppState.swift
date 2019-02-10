@@ -21,16 +21,18 @@ struct AppState: Codable {
     var watchedVideos: [Video] = []
 }
 
-let appReducer: Reducer<AppState, AppAction, AppEffect> =
-    accountReducer
-        .lift(state: lens(\AppState.accountState),
-              action: AppAction.prism.accountAction)
-        <> loginReducer
-            .lift(state: lens(\AppState.accountState.loginState),
-                  action: AppAction.prism.loginAction)
-        <> videoReducer
-            .lift(state: both(lens(\.videosState), lens(\.watchedVideos)),
-                  action: AppAction.prism.videosAction)
+let appReducer = accountReducer
+    .lift(state: lens(\AppState.accountState),
+          action: AppAction.prism.accountAction)
+    <> accountLoginReducer.lift(
+        state: lens(\AppState.accountState),
+        action: AppAction.prism.loginAction)
+    <> loginReducer.lift(
+        state: lens(\AppState.accountState.loginState),
+        action: AppAction.prism.loginAction)
+    <> videoReducer.lift(
+        state: both(lens(\.videosState), lens(\.watchedVideos)),
+        action: AppAction.prism.videosAction)
 
 extension AppAction {
     enum prism {
