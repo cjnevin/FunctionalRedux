@@ -57,7 +57,7 @@ private extension Array where Element == Video {
     func items() -> [Video] {
         return lazy.reversed().unique.map {
             let x = self.count($0)
-            return Video(id: $0.id, title: "\($0.title) (\(x) times)", videoUrl: $0.videoUrl)
+            return Video(id: $0.id, title: "\($0.title) (\(x) time\(x > 1 ? "s" : ""))", videoUrl: $0.videoUrl)
         }
     }
 
