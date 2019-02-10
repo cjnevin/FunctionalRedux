@@ -27,7 +27,7 @@ func appInterpreter(_ deps: Dependencies) -> AppStore.Interpreter {
                 actions.forEach(dispatch)
             }
         case let .log(text):
-            print("[Logger] \(text)")
+            deps.log("[Logger] \(text)")
         case let .track(event):
             deps.track(event)
         case .save:
