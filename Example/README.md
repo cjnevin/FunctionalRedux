@@ -29,9 +29,12 @@ The subscribers are called whenever the (S)tate is changed.
 A description of a side effect that describes what task you want to perform. Typical descriptions may include things such as 'save', 'log', 'load url', 'api', 'wait', etc...
 
 ### Interpreter
-(Void -> S, E) -> ((A) -> Void) -> Void
+(() -> S, E, (A) -> Void) -> Void
 
-The interpreter takes a function to get the current (S)tate and an (E)ffect and returns a closure which performs (A)ctions.
+The interpreter takes:
+* A function to return the current (S)tate (`() -> S)`)
+* An effect to interpret (`E`)
+* A closure to dispatch (A)ctions in the store (`(A) -> Void)`)
 
 This is the only place side effects can actually occur, up until this point everything is an 'intent' to do something. This is where you would implement storage, logging, network requests, timers, etc...
 
