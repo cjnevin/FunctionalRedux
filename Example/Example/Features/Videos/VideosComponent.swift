@@ -18,6 +18,7 @@ final class VideosComponent: TableViewControllerComponent<VideoItem> {
         value.onViewWillAppear = { [weak self] _ in self?.subscribe() }
         value.onViewDidDisappear = { [weak self] _ in self?.unsubscribe() }
         register(VideosCell.self)
+        store.dispatch(.videosAction(.retry))
     }
 
     private func subscribe() {
