@@ -3,14 +3,15 @@ import Foundation
 public final class Store<S, A, E: Monoid> {
     private let reducer: Reducer<S, A, E>
     private var subscribers: [String: (S) -> Void] = [:]
-    private var interpreter: (S, E) -> Future<[A]>
+    private var interpreter: (@escaping () -> S, E) -> (@escaping (A) -> Void) -> Void
+
     private var currentState: S {
         didSet {
             self.subscribers.values.forEach { $0(self.currentState) }
         }
     }
     
-    public init(reducer: Reducer<S, A, E>, initialState: S, interpreter: @escaping (S, E) -> Future<[A]>) {
+    public init(reducer: Reducer<S, A, E>, initialState: S, interpreter: @escaping (@escaping () -> S, E) -> (@escaping (A) -> Void) -> Void) {
         self.reducer = reducer
         self.currentState = initialState
         self.interpreter = interpreter
@@ -19,10 +20,7 @@ public final class Store<S, A, E: Monoid> {
     public func dispatch(_ action: A) {
         assert(Thread.isMainThread)
         let effect = self.reducer.reduce(&self.currentState, action)
-        self.interpreter(self.currentState, effect).onResult { [weak self] actions in
-            guard let self = self else { return () }
-            actions.forEach(self.dispatch)
-        }
+        self.interpreter({ self.currentState }, effect)(dispatch)
     }
     
     public func subscribe(_ subscriber: @escaping (S) -> Void) -> String {
