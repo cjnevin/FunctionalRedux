@@ -32,7 +32,7 @@ struct ApiConfiguration {
 func createApi(with configuration: ApiConfiguration) -> (ApiRequest) -> Future<ApiResponse> {
     return { request in
         if request.parameters.keys.contains("fail") {
-            return delayed(.failure(ApiError.invalidData))
+            return delayed(.success(Data()))
         }
         let user = User(id: 500, name: "TestUser")
         let encoded = try! JSONEncoder().encode(user)

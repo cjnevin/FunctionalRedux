@@ -12,6 +12,7 @@ import Foundation
 enum AppAction {
     case accountAction(AccountAction)
     case loginAction(LoginAction)
+    case loginFormAction(LoginFormAction)
     case videosAction(VideosAction)
 }
 
@@ -30,6 +31,9 @@ let appReducer = accountReducer
     <> loginReducer.lift(
         state: lens(\AppState.accountState.loginState),
         action: AppAction.prism.loginAction)
+    <> loginFormReducer.lift(
+        state: lens(\AppState.accountState.loginState),
+        action: AppAction.prism.loginFormAction)
     <> videoReducer.lift(
         state: both(lens(\.videosState), lens(\.watchedVideos)),
         action: AppAction.prism.videosAction)
@@ -47,6 +51,12 @@ extension AppAction {
                 if case let .loginAction(action) = $0 { return action }
                 return nil
         }, review: AppAction.loginAction)
+
+        static let loginFormAction = Prism<AppAction, LoginFormAction>(
+            preview: {
+                if case let .loginFormAction(action) = $0 { return action }
+                return nil
+        }, review: AppAction.loginFormAction)
 
         static let videosAction = Prism<AppAction, VideosAction>(
             preview: {

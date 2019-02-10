@@ -14,13 +14,13 @@ final class LoginComponent: ViewControllerComponent {
     private lazy var email = TextFieldComponent {
         $0.apply(style: Styles.emailStyle)
         $0.input(\.accountState.loginState.email)
-        $0.setOnChange { .loginAction(.setEmail($0)) }
+        $0.setOnChange { .loginFormAction(.setEmail($0)) }
         $0.setOnReturn { [weak self] in self?.password.unbox.becomeFirstResponder() }
     }
     private lazy var password = TextFieldComponent {
         $0.apply(style: Styles.passwordStyle)
         $0.input(\.accountState.loginState.password)
-        $0.setOnChange { .loginAction(.setPassword($0)) }
+        $0.setOnChange { .loginFormAction(.setPassword($0)) }
         $0.setOnReturn { [weak self] in self?.submit.onTapEvent() }
     }
     private lazy var submit = ButtonComponent {
@@ -66,7 +66,7 @@ final class LoginComponent: ViewControllerComponent {
             }
             self?.password.apply(style: Styles.isSecure(!revealed))
             self?.password.setAccessory(image: image) {
-                return AppAction.loginAction(.revealPassword(!revealed))
+                return AppAction.loginFormAction(.revealPassword(!revealed))
             }
         }
         subscribe(\AppState.accountState.loginState.pending) { [weak self] loading in
@@ -74,9 +74,7 @@ final class LoginComponent: ViewControllerComponent {
         }
         subscribe(\AppState.accountState.loginState.failed) { [weak self] failed in
             guard failed else { return }
-            self?.present(AlertComponent(alert: .loginFailed {
-                store.dispatch(AppAction.loginAction(.resetFailed))
-            }))
+            self?.present(AlertComponent(alert: .loginFailed()))
         }
     }
 
@@ -87,7 +85,7 @@ final class LoginComponent: ViewControllerComponent {
     private func clearPasswordAndDismiss() {
         stackView.resignFirstResponders()
         dismiss {
-            store.dispatch(.loginAction(.setPassword(nil)))
+            store.dispatch(.loginFormAction(.setPassword(nil)))
         }
     }
 }
@@ -95,8 +93,8 @@ final class LoginComponent: ViewControllerComponent {
 // MARK: - Alert
 
 private extension Alert {
-    static func loginFailed(_ callback: @escaping () -> Void) -> Alert {
-        return Alert("Login Failed", message: "Something went wrong", style: .alert, buttons: [.ok(callback)])
+    static func loginFailed() -> Alert {
+        return Alert("Login Failed", message: "Something went wrong", style: .alert, buttons: [.ok({ })])
     }
 }
 

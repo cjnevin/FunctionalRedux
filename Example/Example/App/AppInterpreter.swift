@@ -12,20 +12,24 @@ import Foundation
 func appInterpreter(_ deps: Dependencies) -> (AppState, AppEffect) -> Future<[AppAction]> {
     return { state, effect in
         switch effect {
-        case .sequence(let effects):
+        case let .sequence(effects):
             return effects.reduce(pure(.identity)) { result, sideEffect in
                 zip(result, appInterpreter(deps)(state, sideEffect)).flatMap { a, b in
                     pure(a + b)
                 }
             }
-        case .api(let endpoint):
+        case let .delay(effect, delay):
+            return appInterpreter(deps)(state, effect).flatMap { delayed($0, delay: delay) }
+        case let .action(action):
+            return pure([action])
+        case let .api(endpoint):
             return deps.request(endpoint.request).map(endpoint.actions)
+        case let .log(text):
+            print("[Logger] \(text)")
+        case let .track(event):
+            deps.track(event)
         case .save:
             deps.store.set(state)
-        case .log(let text):
-            print("[Logger] \(text)")
-        case .track(let event):
-            deps.track(event)
         }
         return pure(.identity)
     }

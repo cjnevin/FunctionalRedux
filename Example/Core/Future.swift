@@ -50,11 +50,11 @@ public func pure<A>(_ x: A) -> Future<A> {
     return Future<A> { f in f(x) }
 }
 
-public func delayed<A>(_ x: A) -> Future<A> {
+public func delayed<A>(_ x: A, delay: TimeInterval = 1) -> Future<A> {
     return Future<A> { f in
-        print("delaying...")
-        DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            print("done!")
+        debugPrint("delaying...")
+        DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
+            debugPrint("done!")
             f(x)
         }
     }

@@ -9,12 +9,22 @@
 import Foundation
 import Core
 
-enum AppEffect {
+indirect enum AppEffect {
     case sequence([AppEffect])
+    case delay(AppEffect, TimeInterval)
+    case action(AppAction)
     case api(ApiEndpoint)
     case log(String)
     case save
     case track(AnalyticsEvent)
+
+    static func async(_ effect: AppEffect) -> AppEffect {
+        return .delay(effect, 0)
+    }
+
+    static func actions(_ actions: [AppAction]) -> AppEffect {
+        return .sequence(actions.map(AppEffect.action))
+    }
 }
 
 extension AppEffect: Monoid {

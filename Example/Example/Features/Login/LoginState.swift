@@ -14,14 +14,17 @@ struct User: Codable {
     let name: String
 }
 
-enum LoginAction {
+enum LoginFormAction {
     case revealPassword(Bool)
     case setEmail(String?)
     case setPassword(String?)
-    case resetFailed
+}
+
+enum LoginAction {
     case logIn
     case loginFailed
     case loggedIn(User)
+    case resetFailed
 }
 
 struct LoginState: Codable {
@@ -40,11 +43,8 @@ struct LoginState: Codable {
     }
 }
 
-let loginReducer = Reducer<LoginState, LoginAction, AppEffect> { state, action in
+let loginFormReducer = Reducer<LoginState, LoginFormAction, AppEffect> { state, action in
     switch action {
-    case let .revealPassword(revealed):
-        state.revealed = revealed
-        return .identity
     case let .setEmail(email):
         state.email = email
         return .log(email.map { "Set email to: \($0)" } ?? "Cleared email")
@@ -53,6 +53,14 @@ let loginReducer = Reducer<LoginState, LoginAction, AppEffect> { state, action i
         state.password = password
         return .log(password.map { "Set password to: \($0)" } ?? "Cleared password")
             <> .save
+    case let .revealPassword(revealed):
+        state.revealed = revealed
+        return .identity
+    }
+}
+
+let loginReducer = Reducer<LoginState, LoginAction, AppEffect> { state, action in
+    switch action {
     case .resetFailed:
         state.failed = false
         return .identity
@@ -60,6 +68,7 @@ let loginReducer = Reducer<LoginState, LoginAction, AppEffect> { state, action i
         state.failed = true
         state.pending = false
         return .log("Log in failed")
+            <> .async(.action(.loginAction(.resetFailed)))
     case .loggedIn:
         state.pending = false
         return .identity
