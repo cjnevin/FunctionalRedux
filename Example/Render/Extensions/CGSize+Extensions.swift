@@ -16,6 +16,9 @@ extension CGSize {
     public var floor: CGSize {
         return CGSize(width: Darwin.floor(width), height: Darwin.floor(height))
     }
+    public func plus(x: CGFloat, y: CGFloat) -> CGSize {
+        return CGSize(width: width + x, height: height + y)
+    }
     public func multiply(x: CGFloat, y: CGFloat) -> CGSize {
         return CGSize(width: width * x, height: height * y)
     }

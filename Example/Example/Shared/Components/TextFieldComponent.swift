@@ -6,6 +6,7 @@
 //  Copyright © 2019 CJNevin. All rights reserved.
 //
 
+import Core
 import Render
 import UIKit
 
@@ -44,9 +45,9 @@ class TextFieldComponent: Component<UITextField> {
 
     func setAccessory(image: UIImage, action: @escaping () -> AppAction) {
         accessory = ButtonComponent {
-            $0.unbox.setImage(image, for: .normal)
-            $0.unbox.imageEdgeInsets = UIEdgeInsets(top: 5, left: 0, bottom: 5, right: 10)
-            $0.unbox.frame = CGRect(origin: .zero, size: image.size)
+            $0.apply(style: Styles.background(.white).cast() <> Styles.image(image))
+            $0.unbox.imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 10)
+            $0.unbox.frame = CGRect(origin: .zero, size: image.size.plus(x: 5, y: 0))
             $0.setOnTap(action)
         }
     }
@@ -61,11 +62,21 @@ class TextFieldComponent: Component<UITextField> {
 }
 
 private class InsetTextField: UITextField {
-    override func textRect(forBounds bounds: CGRect) -> CGRect {
+    private func inset(forBounds bounds: CGRect) -> CGRect {
+        if let right = rightView?.frame.width {
+            return CGRect(x: bounds.origin.x + 10,
+                          y: bounds.origin.y,
+                          width: bounds.width - right - 10,
+                          height: bounds.height)
+        }
         return bounds.insetBy(dx: 10, dy: 0)
     }
 
+    override func textRect(forBounds bounds: CGRect) -> CGRect {
+        return inset(forBounds: bounds)
+    }
+
     override func editingRect(forBounds bounds: CGRect) -> CGRect {
-        return bounds.insetBy(dx: 10, dy: 0)
+        return inset(forBounds: bounds)
     }
 }

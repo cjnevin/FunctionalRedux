@@ -17,4 +17,8 @@ extension Styles {
     public static func titleColor(_ color: UIColor, for state: UIControl.State = .normal) -> Style<UIButton> {
         return .init { $0.setTitleColor(color, for: state) }
     }
+
+    public static func image(_ image: UIImage?, for state: UIControl.State = .normal) -> Style<UIButton> {
+        return .init { $0.setImage(image, for: state) }
+    }
 }
