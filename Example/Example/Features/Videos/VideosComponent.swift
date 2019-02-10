@@ -14,6 +14,11 @@ final class VideosComponent: TableViewControllerComponent<Video> {
         super.init(value)
         unbox?.title = "Videos"
         register(TextCell.self)
+        unbox?.onViewWillAppear = { [weak self] _ in self?.subscribe() }
+        unbox?.onViewDidDisappear = { [weak self] _ in self?.unsubscribe() }
+    }
+
+    private func subscribe() {
         subscribe(\AppState.sections) { [weak self] sections in
             self?.sections = sections
         }

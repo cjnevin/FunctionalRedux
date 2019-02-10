@@ -11,6 +11,10 @@ import UIKit
 open class ViewController: UIViewController {
     private let componentType: WeakComponent<ViewController>.Type
     private var component: WeakComponent<ViewController>?
+    open var onViewWillAppear: ((Bool) -> Void)?
+    open var onViewWillDisappear: ((Bool) -> Void)?
+    open var onViewDidAppear: ((Bool) -> Void)?
+    open var onViewDidDisappear: ((Bool) -> Void)?
 
     public init(_ componentType: WeakComponent<ViewController>.Type) {
         self.componentType = componentType
@@ -24,6 +28,26 @@ open class ViewController: UIViewController {
     open override func viewDidLoad() {
         super.viewDidLoad()
         component = componentType.init(self)
+    }
+
+    open override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        onViewWillAppear?(animated)
+    }
+
+    open override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        onViewWillDisappear?(animated)
+    }
+
+    open override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        onViewDidAppear?(animated)
+    }
+
+    open override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+        onViewDidDisappear?(animated)
     }
 }
 

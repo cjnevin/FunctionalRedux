@@ -15,6 +15,11 @@ final class AccountComponent: TableViewControllerComponent<AccountItem> {
         unbox?.title = "Account"
         register(SwitchCell.self)
         register(TextCell.self)
+        unbox?.onViewWillAppear = { [weak self] _ in self?.subscribe() }
+        unbox?.onViewDidDisappear = { [weak self] _ in self?.unsubscribe() }
+    }
+
+    private func subscribe() {
         subscribe(\AppState.accountState.sections) { [weak self] sections in
             self?.sections = sections
         }
