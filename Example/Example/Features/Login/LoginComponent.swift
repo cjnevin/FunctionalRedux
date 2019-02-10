@@ -59,20 +59,20 @@ final class LoginComponent: ViewControllerComponent {
                 self?.clearPasswordAndDismiss()
             }
         }
-        subscribe(\AppState.accountState.loginState.revealed) { [weak self] revealed in
+        subscribe(\.accountState.loginState.revealed) { [weak self] revealed in
             guard let image = UIImage(named: revealed ? "crossed-eye" : "eye") else {
                 assertionFailure("Missing image")
                 return
             }
             self?.password.apply(style: Styles.isSecure(!revealed))
             self?.password.setAccessory(image: image) {
-                return AppAction.loginFormAction(.revealPassword(!revealed))
+                return .loginFormAction(.revealPassword(!revealed))
             }
         }
-        subscribe(\AppState.accountState.loginState.pending) { [weak self] loading in
+        subscribe(\.accountState.loginState.pending) { [weak self] loading in
             self?.loadingView.isLoading = loading
         }
-        subscribe(\AppState.accountState.loginState.failed) { [weak self] failed in
+        subscribe(\.accountState.loginState.failed) { [weak self] failed in
             guard failed else { return }
             self?.present(AlertComponent(alert: .loginFailed()))
         }

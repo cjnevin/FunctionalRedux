@@ -10,15 +10,6 @@ import Core
 import Render
 import UIKit
 
-final class VideosCell: TextCell {
-    func setItem(_ item: VideoItem) {
-        setText(item.title)
-        textLabel?.textColor = item.isReady ? .black : .lightGray
-        textLabel?.font = item.isReady ? UIFont.systemFont(ofSize: 16) : UIFont.italicSystemFont(ofSize: 16)
-        selectionStyle = item.isReady ? .default : .none
-    }
-}
-
 final class VideosComponent: TableViewControllerComponent<VideoItem> {
     required init(_ value: TableViewController) {
         super.init(value)
@@ -54,6 +45,15 @@ final class VideosComponent: TableViewControllerComponent<VideoItem> {
 
     @objc private func onTrash() {
         store.dispatch(.videosAction(.clearHistory))
+    }
+}
+
+final class VideosCell: TextCell {
+    func setItem(_ item: VideoItem) {
+        setText(item.title)
+        textLabel?.textColor = item.isReady ? .black : .lightGray
+        textLabel?.font = item.isReady ? .systemFont(ofSize: 16) : .italicSystemFont(ofSize: 16)
+        selectionStyle = item.isReady ? .default : .none
     }
 }
 

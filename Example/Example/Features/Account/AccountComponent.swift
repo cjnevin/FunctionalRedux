@@ -20,7 +20,7 @@ final class AccountComponent: TableViewControllerComponent<AccountItem> {
     }
 
     private func subscribe() {
-        subscribe(\AppState.accountState.sections) { [weak self] sections in
+        subscribe(\.accountState.sections) { [weak self] sections in
             self?.sections = sections
         }
     }
@@ -36,7 +36,7 @@ final class AccountComponent: TableViewControllerComponent<AccountItem> {
             cell.setText(item.title)
             cell.setOn(on)
             cell.setOnToggle { on in
-                return AppAction.accountAction(.tappedNotification(on: on))
+                return .accountAction(.tappedNotification(on: on))
             }
             return cell
         }
@@ -51,10 +51,10 @@ final class AccountComponent: TableViewControllerComponent<AccountItem> {
             present(LoginComponent.navigationComponent())
         case .logout:
             present(AlertComponent(alert: .logout(cancel: deselect) {
-                store.dispatch(AppAction.accountAction(.tappedLogout))
+                store.dispatch(.accountAction(.tappedLogout))
             }))
         case .notifications(let on):
-            store.dispatch(AppAction.accountAction(.tappedNotification(on: !on)))
+            store.dispatch(.accountAction(.tappedNotification(on: !on)))
         case .user:
             deselect()
         }
