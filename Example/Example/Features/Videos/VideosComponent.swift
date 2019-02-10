@@ -48,7 +48,28 @@ private extension AppState {
     var sections: [TableViewSection<Video>] {
         return [
             TableViewSection(title: "Videos", items: videosState.videos),
-            TableViewSection(title: watchedVideos.isEmpty ? nil : "History", items: watchedVideos.reversed())
+            TableViewSection(title: watchedVideos.isEmpty ? nil : "History", items: watchedVideos.items())
         ]
+    }
+}
+
+private extension Array where Element == Video {
+    func items() -> [Video] {
+        return lazy.reversed().unique.map {
+            let x = self.count($0)
+            return Video(id: $0.id, title: "\($0.title) (\(x) times)", videoUrl: $0.videoUrl)
+        }
+    }
+
+    private func count(_ video: Video) -> Int {
+        return filter { $0.id == video.id }.count
+    }
+
+    private var unique: [Video] {
+        return reduce(into: [], { (result, video) in
+            if !result.contains { $0.id == video.id } {
+                result.append(video)
+            }
+        })
     }
 }
