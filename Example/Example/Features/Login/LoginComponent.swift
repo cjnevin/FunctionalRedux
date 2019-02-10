@@ -41,15 +41,16 @@ final class LoginComponent: ViewControllerComponent {
 
     required init(_ value: ViewController) {
         super.init(value)
+        value.title = "Login"
+        value.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(onCancel))
+        value.onViewWillAppear = { [weak self] _ in self?.subscribe() }
+        value.onViewDidDisappear = { [weak self] _ in self?.unsubscribe() }
+
         apply(style: Styles.whiteViewStyle.promote())
-        unbox?.title = "Login"
-        unbox?.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(onCancel))
         view?.addSubview(stackView, constraints: [
             equalTopSafeArea(offset: 20),
             equalLeading(offset: 20),
             equalTrailing(offset: -20)])
-        unbox?.onViewWillAppear = { [weak self] _ in self?.subscribe() }
-        unbox?.onViewDidDisappear = { [weak self] _ in self?.unsubscribe() }
     }
 
     private func subscribe() {

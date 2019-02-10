@@ -12,11 +12,11 @@ import UIKit
 final class AccountComponent: TableViewControllerComponent<AccountItem> {
     required init(_ value: TableViewController) {
         super.init(value)
-        unbox?.title = "Account"
+        value.title = "Account"
+        value.onViewWillAppear = { [weak self] _ in self?.subscribe() }
+        value.onViewDidDisappear = { [weak self] _ in self?.unsubscribe() }
         register(SwitchCell.self)
         register(TextCell.self)
-        unbox?.onViewWillAppear = { [weak self] _ in self?.subscribe() }
-        unbox?.onViewDidDisappear = { [weak self] _ in self?.unsubscribe() }
     }
 
     private func subscribe() {

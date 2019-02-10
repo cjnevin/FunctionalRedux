@@ -12,11 +12,11 @@ import UIKit
 final class VideosComponent: TableViewControllerComponent<Video> {
     required init(_ value: TableViewController) {
         super.init(value)
-        unbox?.title = "Videos"
-        unbox?.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(onTrash))
+        value.title = "Videos"
+        value.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(onTrash))
+        value.onViewWillAppear = { [weak self] _ in self?.subscribe() }
+        value.onViewDidDisappear = { [weak self] _ in self?.unsubscribe() }
         register(TextCell.self)
-        unbox?.onViewWillAppear = { [weak self] _ in self?.subscribe() }
-        unbox?.onViewDidDisappear = { [weak self] _ in self?.unsubscribe() }
     }
 
     private func subscribe() {
