@@ -10,9 +10,9 @@ import Core
 import Foundation
 
 struct Video: Codable {
-    let id: Int
-    let title: String
-    let videoUrl: String
+    var id: Int
+    var title: String
+    var videoUrl: String
 }
 
 enum VideosAction {
