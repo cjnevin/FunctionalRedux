@@ -54,7 +54,9 @@ This allows us to do things like:
 * Delegation/callbacks
 * Create UI components that we can plug and play
 
-The weak variant (WeakComponent) is currently used only by ViewController's as they manage their own lifecycle and will not be deallocated if the component is not set to nil if we were to use a strong variant (Component).
+The weak variant (`WeakComponent`) is currently used only by `ViewController`'s as they manage their own lifecycle and will not be deallocated if the component is not set to nil if we were to use a strong variant (`Component`).
+
+If you need to do something complicated in your `UIViewController` you can always subclass (`ViewController`, `TabBarController`, `NavigationController`, `TableViewController`) and pass in your `ViewController` into one of the `xControllerComponent`'s.
 
 ### Constraint
 
