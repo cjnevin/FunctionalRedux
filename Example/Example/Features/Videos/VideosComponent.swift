@@ -13,6 +13,7 @@ final class VideosComponent: TableViewControllerComponent<Video> {
     required init(_ value: TableViewController) {
         super.init(value)
         unbox?.title = "Videos"
+        unbox?.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(onTrash))
         register(TextCell.self)
         unbox?.onViewWillAppear = { [weak self] _ in self?.subscribe() }
         unbox?.onViewDidDisappear = { [weak self] _ in self?.unsubscribe() }
@@ -36,6 +37,10 @@ final class VideosComponent: TableViewControllerComponent<Video> {
         } else {
             tableView.deselectRow(at: indexPath, animated: true)
         }
+    }
+
+    @objc private func onTrash() {
+        store.dispatch(.videosAction(.clearHistory))
     }
 }
 

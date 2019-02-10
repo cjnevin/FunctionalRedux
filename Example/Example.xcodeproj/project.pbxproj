@@ -69,6 +69,7 @@
 		83923AE7220F82F900EE4AB6 /* WeakComponent+Subscriptions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83923AE6220F82F900EE4AB6 /* WeakComponent+Subscriptions.swift */; };
 		83923AE9220F8F2400EE4AB6 /* AppTabBarComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83923AE8220F8F2400EE4AB6 /* AppTabBarComponent.swift */; };
 		83923AEC220F933B00EE4AB6 /* AppStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83923AEB220F933B00EE4AB6 /* AppStyles.swift */; };
+		83923AEE221014AF00EE4AB6 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83923AED221014AF00EE4AB6 /* Storage.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -175,6 +176,7 @@
 		83923AE6220F82F900EE4AB6 /* WeakComponent+Subscriptions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "WeakComponent+Subscriptions.swift"; sourceTree = "<group>"; };
 		83923AE8220F8F2400EE4AB6 /* AppTabBarComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppTabBarComponent.swift; sourceTree = "<group>"; };
 		83923AEB220F933B00EE4AB6 /* AppStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStyles.swift; sourceTree = "<group>"; };
+		83923AED221014AF00EE4AB6 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -253,6 +255,7 @@
 				8365E1692203841100074C21 /* Result.swift */,
 				8365E16B2203841100074C21 /* Semigroup.swift */,
 				8365E1642203841100074C21 /* Store.swift */,
+				83923AED221014AF00EE4AB6 /* Storage.swift */,
 				8365E147220383DD00074C21 /* Info.plist */,
 			);
 			path = Core;
@@ -615,6 +618,7 @@
 				8365E1742203841200074C21 /* Semigroup.swift in Sources */,
 				8365E1702203841200074C21 /* Future.swift in Sources */,
 				8365E16F2203841200074C21 /* Lens.swift in Sources */,
+				83923AEE221014AF00EE4AB6 /* Storage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

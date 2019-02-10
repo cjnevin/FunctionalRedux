@@ -21,7 +21,7 @@ func appInterpreter(_ deps: Dependencies) -> (AppState, AppEffect) -> Future<[Ap
         case .api(let endpoint):
             return deps.request(endpoint.request).map(endpoint.actions)
         case .save:
-            deps.store("state").set(state)
+            deps.store.set(state)
         case .log(let text):
             print("[Logger] \(text)")
         case .track(let event):

@@ -9,17 +9,18 @@
 import Core
 import Foundation
 
-struct Video {
+struct Video: Codable {
     let id: Int
     let title: String
     let videoUrl: String
 }
 
 enum VideosAction {
+    case clearHistory
     case tappedVideo(Video)
 }
 
-struct VideosState {
+struct VideosState: Codable {
     var videos: [Video] = []
 }
 
@@ -28,8 +29,13 @@ let videoReducer = Reducer<(VideosState, [Video]), VideosAction, AppEffect> { st
     defer { state = (videoState, watchedVideos) }
 
     switch action {
+    case .clearHistory:
+        watchedVideos = []
+        return .log("Cleared history")
+            <> .save
     case let .tappedVideo(video):
         watchedVideos += [video]
         return .log("Watched \(video.title)")
+            <> .save
     }
 }

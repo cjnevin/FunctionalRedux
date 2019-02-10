@@ -11,5 +11,5 @@ import Foundation
 struct Dependencies {
     let request = createApi(with: ApiConfiguration(basePath: "http://test.com"))
     let track = createAnalytics(with: FakeTracker())
-    let store = createStorage(initialValue: [String: Any]())
+    let store = getStorage()
 }

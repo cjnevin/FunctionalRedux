@@ -9,13 +9,19 @@
 import Foundation
 import Core
 
-let video1 = Video(id: 1, title: "The Matrix", videoUrl: "matrix.mp4")
-let video2 = Video(id: 2, title: "The Matrix Reloaded", videoUrl: "matrix2.mp4")
-let video3 = Video(id: 3, title: "The Matrix Revolutions", videoUrl: "matrix3.mp4")
-
 let store = Store<AppState, AppAction, AppEffect>(
     reducer: appReducer,
-    initialState: .init(
+    initialState: dependencies.store.get() ?? getDefaultState(),
+    interpreter: appInterpreter(dependencies)
+)
+
+private let dependencies = Dependencies()
+
+private func getDefaultState() -> AppState {
+    let video1 = Video(id: 1, title: "The Matrix", videoUrl: "matrix.mp4")
+    let video2 = Video(id: 2, title: "The Matrix Reloaded", videoUrl: "matrix2.mp4")
+    let video3 = Video(id: 3, title: "The Matrix Revolutions", videoUrl: "matrix3.mp4")
+    return .init(
         videosState: VideosState(
             videos: [video1, video2, video3]
         ),
@@ -25,7 +31,5 @@ let store = Store<AppState, AppAction, AppEffect>(
             settings: .init(notificationsOn: false)
         ),
         watchedVideos: []
-    ),
-    interpreter: appInterpreter(Dependencies())
-)
-
+    )
+}

@@ -6,8 +6,8 @@
 //  Copyright © 2019 CJNevin. All rights reserved.
 //
 
-import Foundation
 import Core
+import Foundation
 
 struct ApiRequest {
     enum Method: String {

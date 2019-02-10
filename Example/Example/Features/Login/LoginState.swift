@@ -20,7 +20,10 @@ enum LoginAction {
     case logIn
 }
 
-struct LoginState {
+struct LoginState: Codable {
+    enum CodingKeys: String, CodingKey {
+        case email
+    }
     var email: String?
     var password: String?
     var canLogIn: Bool { return fields.lazy.map { $0.isNotEmpty }.reduce(true, <>) }
@@ -35,9 +38,11 @@ let loginReducer = Reducer<LoginState, LoginAction, AppEffect> { state, action i
     case let .setEmail(email):
         state.email = email
         return .log(email.map { "Set email to: \($0)" } ?? "Cleared email")
+            <> .save
     case let .setPassword(password):
         state.password = password
         return .log(password.map { "Set password to: \($0)" } ?? "Cleared password")
+            <> .save
     case .logIn:
         guard state.canLogIn, let email = state.email, let password = state.password else {
             return .identity
@@ -45,14 +50,5 @@ let loginReducer = Reducer<LoginState, LoginAction, AppEffect> { state, action i
         return .log("Logging in")
             <> .track(.accountEvent(.logInPressed))
             <> .api(.logIn(email: email, password: password))
-    }
-}
-
-extension Result where E == ApiError, A == Data {
-    func handleLogin() -> [AppAction] {
-        guard case let .success(data) = self, let user = try? JSONDecoder().decode(User.self, from: data) else {
-            return [.accountAction(.loginFailed)]
-        }
-        return [.accountAction(.loggedIn(user))]
     }
 }

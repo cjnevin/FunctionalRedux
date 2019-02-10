@@ -15,7 +15,7 @@ enum AppAction {
     case videosAction(VideosAction)
 }
 
-struct AppState {
+struct AppState: Codable {
     var videosState: VideosState = .init()
     var accountState: AccountState = .init()
     var watchedVideos: [Video] = []
