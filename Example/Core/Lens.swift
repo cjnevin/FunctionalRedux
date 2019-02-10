@@ -26,6 +26,16 @@ public func both<A, B, C>(_ lhs: Lens<A, B>, _ rhs: Lens<A, C>) -> Lens<A, (B, C
     })
 }
 
+public func many<A, B, C, D>(_ b: Lens<A, B>, _ c: Lens<A, C>, _ d: Lens<A, D>) -> Lens<A, (B, C, D)> {
+    return Lens<A, (B, C, D)>.init(
+        view: { (b.view($0), c.view($0), d.view($0)) },
+        mutatingSet: { whole, parts in
+            b.mutatingSet(&whole, parts.0)
+            c.mutatingSet(&whole, parts.1)
+            d.mutatingSet(&whole, parts.2)
+    })
+}
+
 public func lens<A, B>(_ keyPath: WritableKeyPath<A, B>) -> Lens<A, B> {
     return Lens<A, B>(
         view: { $0[keyPath: keyPath] },

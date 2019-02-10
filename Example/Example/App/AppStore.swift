@@ -34,6 +34,7 @@ private func getDefaultState() -> AppState {
             loggedInUser: nil,
             settings: .init(notificationsOn: false)
         ),
-        watchedVideos: []
+        watchedVideos: [],
+        downloadedVideos: []
     )
 }
