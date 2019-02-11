@@ -21,7 +21,11 @@ public struct Style<T> {
     }
 }
 
-extension Style: Semigroup {
+extension Style: Monoid {
+    public static var empty: Style<T> {
+        return .init { _ in }
+    }
+    
     public func combine(with other: Style) -> Style {
         return Style {
             self.callback($0)

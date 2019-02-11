@@ -9,8 +9,8 @@ public struct Reducer<S, A, E: Monoid> {
 }
 
 extension Reducer: Monoid {
-    public static var identity: Reducer<S, A, E> {
-        return Reducer { s, _ in return E.identity }
+    public static var empty: Reducer<S, A, E> {
+        return Reducer { s, _ in return E.empty }
     }
 
     public func combine(with other: Reducer<S, A, E>) -> Reducer<S, A, E> {
@@ -39,7 +39,7 @@ extension Reducer {
 extension Reducer {
     public func lift<B>(action: Prism<B, A>) -> Reducer<S, B, E> {
         return Reducer<S, B, E> { s, b in
-            guard let a = action.preview(b) else { return E.identity }
+            guard let a = action.preview(b) else { return E.empty }
             return self.reduce(&s, a)
         }
     }
@@ -47,7 +47,7 @@ extension Reducer {
     public func lift<B>(effect: Prism<E, B>) -> Reducer<S, A, B> {
         return Reducer<S, A, B> { s, a in
             let e = self.reduce(&s, a)
-            return effect.preview(e) ?? B.identity
+            return effect.preview(e) ?? B.empty
         }
     }
 }

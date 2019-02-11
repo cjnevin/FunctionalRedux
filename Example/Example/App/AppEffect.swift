@@ -28,7 +28,7 @@ indirect enum AppEffect {
 }
 
 extension AppEffect: Monoid {
-    static var identity: AppEffect { return .sequence([]) }
+    static var empty: AppEffect { return .sequence([]) }
     
     func combine(with other: AppEffect) -> AppEffect {
         switch (self, other) {

@@ -1,29 +1,35 @@
 import Foundation
 
 public protocol Monoid: Semigroup {
-    static var identity: Self { get }
+    static var empty: Self { get }
 }
 
 extension Numeric where Self: Monoid {
-    public static var identity: Self { return 0 }
+    public static var empty: Self { return 0 }
 }
 
 extension Int: Monoid { }
 
 extension Bool: Monoid {
-    public static let identity = true
+    public static let empty = true
 }
 
 extension String: Monoid {
-    public static let identity = ""
+    public static let empty = ""
 }
 
 extension Array: Monoid {
-    public static var identity: Array {
+    public static var empty: Array {
         return []
     }
 }
 
-public func concat<M: Monoid>(_ xs: [M]) -> M {
-    return xs.reduce(M.identity, <>)
+public func concat<M: Monoid>(_ values: [M]) -> M {
+    return values.reduce(M.empty, <>)
+}
+
+extension Sequence where Element: Monoid {
+    public func joined() -> Element {
+        return concat(Array(self))
+    }
 }

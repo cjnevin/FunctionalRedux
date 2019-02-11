@@ -45,7 +45,7 @@ let videoReducer = Reducer<(VideosState, [Video], [VideoDownload]), VideosAction
         return .log("Watched \(download.video.title)")
             <> .save
     case .watch:
-        return .identity
+        return .empty
     case let .download(video):
         return .log("Downloading \(video.title)")
             <> .save
@@ -63,7 +63,7 @@ let videoReducer = Reducer<(VideosState, [Video], [VideoDownload]), VideosAction
             .filter { !$0.isComplete }
             .map { $0.video }
             .map(AppEffect.download)
-            .reduce(.identity, <>)
+            .reduce(.empty, <>)
     }
 }
 
@@ -95,7 +95,7 @@ private extension AppEffect {
             .map(action)
             .enumerated()
             .map(effect)
-            .reduce(.identity, <>)
+            .reduce(.empty, <>)
 
         return .action(.videosAction(.downloading(initial))) <> incrementEffects
     }

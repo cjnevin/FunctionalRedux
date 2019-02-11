@@ -43,6 +43,6 @@ let accountLoginReducer = Reducer<AccountState, LoginAction, AppEffect> { state,
         return .log("Logged in as \(user.name)")
             <> .save
     default:
-        return .identity
+        return .empty
     }
 }

@@ -55,7 +55,7 @@ let loginFormReducer = Reducer<LoginState, LoginFormAction, AppEffect> { state, 
             <> .save
     case let .revealPassword(revealed):
         state.revealed = revealed
-        return .identity
+        return .empty
     }
 }
 
@@ -63,7 +63,7 @@ let loginReducer = Reducer<LoginState, LoginAction, AppEffect> { state, action i
     switch action {
     case .resetFailed:
         state.failed = false
-        return .identity
+        return .empty
     case .loginFailed:
         state.failed = true
         state.pending = false
@@ -71,10 +71,10 @@ let loginReducer = Reducer<LoginState, LoginAction, AppEffect> { state, action i
             <> .async(.action(.loginAction(.resetFailed)))
     case .loggedIn:
         state.pending = false
-        return .identity
+        return .empty
     case .logIn:
         guard state.canLogIn, let email = state.email, let password = state.password else {
-            return .identity
+            return .empty
         }
         state.failed = false
         state.pending = true
