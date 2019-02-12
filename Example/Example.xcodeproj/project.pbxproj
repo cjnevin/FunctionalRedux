@@ -86,6 +86,8 @@
 		83ECC5E4221242AE008B3FD8 /* LensManyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83ECC5E3221242AE008B3FD8 /* LensManyTests.swift */; };
 		83ECC5E62212445B008B3FD8 /* PredicateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83ECC5E52212445B008B3FD8 /* PredicateTests.swift */; };
 		83ECC5E82212935C008B3FD8 /* Decodable+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83ECC5E72212935C008B3FD8 /* Decodable+Data.swift */; };
+		83ECC5EC221298A7008B3FD8 /* PrismLawTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83ECC5EB221298A7008B3FD8 /* PrismLawTests.swift */; };
+		83ECC5F022129E87008B3FD8 /* Either.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83ECC5EF22129E87008B3FD8 /* Either.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -217,6 +219,8 @@
 		83ECC5E3221242AE008B3FD8 /* LensManyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LensManyTests.swift; sourceTree = "<group>"; };
 		83ECC5E52212445B008B3FD8 /* PredicateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredicateTests.swift; sourceTree = "<group>"; };
 		83ECC5E72212935C008B3FD8 /* Decodable+Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Decodable+Data.swift"; sourceTree = "<group>"; };
+		83ECC5EB221298A7008B3FD8 /* PrismLawTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrismLawTests.swift; sourceTree = "<group>"; };
+		83ECC5EF22129E87008B3FD8 /* Either.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Either.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -296,6 +300,7 @@
 				8365E146220383DD00074C21 /* Core.h */,
 				8388F44322079A9B00907FD2 /* Affine.swift */,
 				8365E162220383F500074C21 /* Applicative.swift */,
+				83ECC5EF22129E87008B3FD8 /* Either.swift */,
 				83ECC5D32212237C008B3FD8 /* Expectation.swift */,
 				8365E1672203841100074C21 /* Future.swift */,
 				8365E1662203841100074C21 /* Lens.swift */,
@@ -495,6 +500,7 @@
 				83ECC5E122123DC3008B3FD8 /* LensLawTests.swift */,
 				83ECC5E3221242AE008B3FD8 /* LensManyTests.swift */,
 				83ECC5E52212445B008B3FD8 /* PredicateTests.swift */,
+				83ECC5EB221298A7008B3FD8 /* PrismLawTests.swift */,
 				83ECC5CD22121E5B008B3FD8 /* SemigroupLawTests.swift */,
 				83ECC5DF2212378A008B3FD8 /* StorageTests.swift */,
 				83ECC5C622121E3B008B3FD8 /* Info.plist */,
@@ -732,6 +738,7 @@
 				8365E1742203841200074C21 /* Semigroup.swift in Sources */,
 				8365E1702203841200074C21 /* Future.swift in Sources */,
 				8365E16F2203841200074C21 /* Lens.swift in Sources */,
+				83ECC5F022129E87008B3FD8 /* Either.swift in Sources */,
 				83923AEE221014AF00EE4AB6 /* Storage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -767,6 +774,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				83ECC5EC221298A7008B3FD8 /* PrismLawTests.swift in Sources */,
 				83ECC5E4221242AE008B3FD8 /* LensManyTests.swift in Sources */,
 				83ECC5E222123DC3008B3FD8 /* LensLawTests.swift in Sources */,
 				83ECC5DC22123554008B3FD8 /* ExpectationEqualTests.swift in Sources */,

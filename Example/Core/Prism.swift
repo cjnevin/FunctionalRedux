@@ -11,6 +11,12 @@ public struct Prism<A, B> {
     }
 }
 
+extension Prism {
+    public func isCase(_ whole: A) -> Bool {
+        return preview(whole) != nil
+    }
+}
+
 extension Optional {
     public static var prism: Prism<Optional, Wrapped> {
         return Prism<Optional, Wrapped>(
