@@ -52,9 +52,7 @@ public func pure<A>(_ x: A) -> Future<A> {
 
 public func delayed<A>(_ x: A, delay: TimeInterval = 1) -> Future<A> {
     return Future<A> { f in
-        debugPrint("delaying...")
         DispatchQueue.main.asyncAfter(deadline: .now() + delay) {
-            debugPrint("done!")
             f(x)
         }
     }

@@ -12,8 +12,7 @@ public struct Storage<T> {
     public let get: () -> T?
     public let set: (T?) -> Void
 
-    public init(get: @escaping () -> T?,
-                set: @escaping (T?) -> Void) {
+    public init(get: @escaping () -> T?, set: @escaping (T?) -> Void) {
         self.get = get
         self.set = set
     }
@@ -25,6 +24,7 @@ extension Storage: Semigroup {
     public func combine(with other: Storage) -> Storage {
         return Storage.init(get: {
             if let left = self.get() {
+                other.set(left)
                 return left
             } else if let right = other.get() {
                 self.set(right)
