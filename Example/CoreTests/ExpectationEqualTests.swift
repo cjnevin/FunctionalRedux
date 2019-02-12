@@ -12,50 +12,50 @@ import XCTest
 
 class ExpectationEqualTests: XCTestCase {
     func testIntEqual() {
-        XCTAssertTrue(expect(1).satisfies(equalTo(1)))
+        XCTAssertTrue(expect(1) == equalTo(1))
     }
 
     func testIntNotEqual() {
-        XCTAssertFalse(expect(1).satisfies(equalTo(2)))
+        XCTAssertTrue(expect(1) != equalTo(2))
     }
 
     func testIntInvertEqual() {
-        XCTAssertTrue(expect(1).satisfies(!equalTo(2)))
+        XCTAssertTrue(expect(1) == !equalTo(2))
     }
 
     func testBoolEqual() {
-        XCTAssertTrue(expect(true).satisfies(equalTo(true)))
+        XCTAssertTrue(expect(true) == equalTo(true))
     }
 
     func testBoolNotEqual() {
-        XCTAssertFalse(expect(true).satisfies(equalTo(false)))
+        XCTAssertTrue(expect(true) != equalTo(false))
     }
 
     func testBoolInvertEqual() {
-        XCTAssertTrue(expect(true).satisfies(!equalTo(false)))
+        XCTAssertTrue(expect(true) == !equalTo(false))
     }
 
     func testStringEqual() {
-        XCTAssertTrue(expect("a").satisfies(equalTo("a")))
+        XCTAssertTrue(expect("a") == equalTo("a"))
     }
 
     func testStringNotEqual() {
-        XCTAssertFalse(expect("a").satisfies(equalTo("b")))
+        XCTAssertTrue(expect("a") != equalTo("b"))
     }
 
     func testStringInvertEqual() {
-        XCTAssertTrue(expect("a").satisfies(!equalTo("b")))
+        XCTAssertTrue(expect("a") == !equalTo("b"))
     }
 
     func testArrayEqual() {
-        XCTAssertTrue(expect([1]).satisfies(equalTo([1])))
+        XCTAssertTrue(expect([1]) == equalTo([1]))
     }
 
     func testArrayNotEqual() {
-        XCTAssertFalse(expect([1]).satisfies(equalTo([2])))
+        XCTAssertTrue(expect([1]) != equalTo([2]))
     }
 
     func testArrayInvertEqual() {
-        XCTAssertTrue(expect([1]).satisfies(!equalTo([2])))
+        XCTAssertTrue(expect([1]) == !equalTo([2]))
     }
 }
