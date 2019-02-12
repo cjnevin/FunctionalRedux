@@ -11,22 +11,64 @@ import XCTest
 @testable import Core
 
 class PrismLawTests: XCTestCase {
-    typealias sut = Either<Int, Bool>
-
-    func testPreviewReviewLeft() {
-        sut.prism.left.assertPreviewReview(.left(1))
+    func testEitherLeftIsFalse() {
+        assert(Either<Int, Bool>.prism.right.isCase(.left(0))).is(equalTo(false))
     }
 
-    func testPreviewReviewRight() {
-        sut.prism.right.assertPreviewReview(.right(true))
+    func testEitherRightIsFalse() {
+        assert(Either<Int, Bool>.prism.left.isCase(.right(false))).is(equalTo(false))
     }
 
-    func testReviewPreviewLeft() {
-        sut.prism.left.assertReviewPreview(1)
+    func testEitherPreviewReviewLeft() {
+        Either<Int, Bool>.prism.left.assertPreviewReview(.left(1))
     }
 
-    func testReviewPreviewRight() {
-        sut.prism.right.assertReviewPreview(false)
+    func testEitherPreviewReviewRight() {
+        Either<Int, Bool>.prism.right.assertPreviewReview(.right(true))
+    }
+
+    func testEitherReviewPreviewLeft() {
+        Either<Int, Bool>.prism.left.assertReviewPreview(1)
+    }
+
+    func testEitherReviewPreviewRight() {
+        Either<Int, Bool>.prism.right.assertReviewPreview(false)
+    }
+
+    func testResultSuccessIsFalse() {
+        assert(Result<Int, Bool>.prism.success.isCase(.failure(0))).is(equalTo(false))
+    }
+
+    func testResultFailureIsFalse() {
+        assert(Result<Int, Bool>.prism.failure.isCase(.success(false))).is(equalTo(false))
+    }
+
+    func testResultPreviewReviewSuccess() {
+        Result<Int, Bool>.prism.success.assertPreviewReview(.success(true))
+    }
+
+    func testResultPreviewReviewFailure() {
+        Result<Int, Bool>.prism.failure.assertPreviewReview(.failure(0))
+    }
+
+    func testResultReviewPreviewSuccess() {
+        Result<Int, Bool>.prism.success.assertReviewPreview(false)
+    }
+
+    func testResultReviewPreviewFailure() {
+        Result<Int, Bool>.prism.failure.assertReviewPreview(1)
+    }
+
+    func testOptionalNoneIsFalse() {
+        assert(Optional<Int>.prism.isCase(.none)).is(equalTo(false))
+    }
+
+    func testOptionalPreviewReviewSome() {
+        Optional<Int>.prism.assertPreviewReview(1)
+    }
+
+    func testEitherReviewPreviewSome() {
+        Optional<Int>.prism.assertReviewPreview(1)
     }
 }
 
