@@ -10,3 +10,11 @@ public struct Prism<A, B> {
         self.review = review
     }
 }
+
+extension Optional {
+    public static var prism: Prism<Optional, Wrapped> {
+        return Prism<Optional, Wrapped>(
+            preview: { $0 },
+            review: Optional.some)
+    }
+}
