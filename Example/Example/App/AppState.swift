@@ -42,27 +42,19 @@ let appReducer = accountReducer
 extension AppAction {
     enum prism {
         static let accountAction = Prism<AppAction, AccountAction>(
-            preview: {
-                if case let .accountAction(action) = $0 { return action }
-                return nil
-        }, review: AppAction.accountAction)
+            preview: { if case let .accountAction(action) = $0 { return action } else { return nil } },
+            review: AppAction.accountAction)
 
         static let loginAction = Prism<AppAction, LoginAction>(
-            preview: {
-                if case let .loginAction(action) = $0 { return action }
-                return nil
-        }, review: AppAction.loginAction)
+            preview: { if case let .loginAction(action) = $0 { return action } else { return nil } },
+            review: AppAction.loginAction)
 
         static let loginFormAction = Prism<AppAction, LoginFormAction>(
-            preview: {
-                if case let .loginFormAction(action) = $0 { return action }
-                return nil
-        }, review: AppAction.loginFormAction)
+            preview: { if case let .loginFormAction(action) = $0 { return action } else { return nil } },
+            review: AppAction.loginFormAction)
 
         static let videosAction = Prism<AppAction, VideosAction>(
-            preview: {
-                if case let .videosAction(action) = $0 { return action }
-                return nil
-        }, review: AppAction.videosAction)
+            preview: { if case let .videosAction(action) = $0 { return action } else { return nil } },
+            review: AppAction.videosAction)
     }
 }

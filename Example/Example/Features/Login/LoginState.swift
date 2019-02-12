@@ -90,9 +90,9 @@ let loginReducer = Reducer<LoginState, LoginAction, AppEffect> { state, action i
 
 extension Result where E == ApiError, A == Data {
     func handleLogin() -> [AppAction] {
-        guard case let .success(data) = self, let user = try? JSONDecoder().decode(User.self, from: data) else {
-            return [.loginAction(.loginFailed)]
-        }
-        return [.loginAction(.loggedIn(user))]
+        return prism.success.preview(self)
+            .flatMap(User.from)
+            .map { [.loginAction(.loggedIn($0))] }
+        ?? [.loginAction(.loginFailed)]
     }
 }

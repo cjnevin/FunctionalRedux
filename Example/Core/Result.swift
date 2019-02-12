@@ -35,3 +35,21 @@ public func <*> <E: Semigroup, A, B>(f: Result<E, (A) -> B>, x: Result<E, A>) ->
     case let (.failure(e1), .failure(e2)): return .failure(e1 <> e2)
     }
 }
+
+extension Result {
+    public enum prism {
+        public static var success: Prism<Result<E, A>, A> {
+            return Prism<Result<E, A>, A>(
+                preview: { if case .success(let a) = $0 { return a } else { return nil } },
+                review: { return .success($0) }
+            )
+        }
+
+        public static var failure: Prism<Result<E, A>, E> {
+            return Prism<Result<E, A>, E>(
+                preview: { if case .failure(let e) = $0 { return e } else { return nil } },
+                review: { return .failure($0) }
+            )
+        }
+    }
+}
