@@ -48,7 +48,7 @@ final class LoginComponent: ViewControllerComponent {
         value.onViewWillAppear = { [weak self] _ in self?.subscribe() }
         value.onViewDidDisappear = { [weak self] _ in self?.unsubscribe() }
 
-        apply(style: Styles.view.default.promote())
+        apply(style: Styles.view.defaultBackground())
         view?.addSubview(stackView, constraints: equalTopSafeArea(offset: 20) <> equalHorizontalEdges(offset: 20))
         view?.addSubview(loadingView, constraints: equalEdges())
     }

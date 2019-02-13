@@ -50,11 +50,17 @@ extension LayerStyles {
     }
 }
 
+extension ViewStyles {
+    static func defaultBackground<T: ViewConvertible>() -> Style<T> {
+        return background(Colors.background)
+    }
+}
+
 extension Styles.field {
     private static let common = capitalization(.none)
         <> correction(.no)
         <> rounded()
-        <> background(Colors.background)
+        <> defaultBackground()
 
     static let email = common
         <> placeholder("Enter email")
@@ -80,7 +86,9 @@ extension Styles.field {
 }
 
 extension Styles.stack {
-    static let vertical = axis(.vertical) <> spacing(20)
+    static let vertical = axis(.vertical)
+        <> spacing(20)
+        <> defaultBackground()
 }
 
 extension Styles.table {
@@ -92,14 +100,14 @@ extension Styles.table.cell {
         let s = font(Fonts.default) <> foregroundColor(Colors.tableCellText)
         return attributedText(s.text(text))
             <> selectionStyle(.default)
-            <> background(Colors.background)
+            <> defaultBackground()
     }
 
     static func disabled<T: UITableViewCell>(_ text: String?) -> Style<T> {
         let s = font(Fonts.italic) <> foregroundColor(Colors.tableCellDisabledText)
         return attributedText(s.text(text))
             <> selectionStyle(.none)
-            <> background(Colors.background)
+            <> defaultBackground()
     }
 
     static func style<T: UITableViewCell>(_ text: String?, isEnabled: Bool) -> Style<T> {
@@ -123,8 +131,4 @@ extension Styles.button {
                 $0.frame = CGRect(origin: .zero, size: img.size.plus(x: 5, y: 0))
             }
     }
-}
-
-extension Styles.view {
-    static let `default` = background(Colors.background)
 }

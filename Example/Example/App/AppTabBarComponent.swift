@@ -14,7 +14,7 @@ final class AppTabBarControllerComponent: TabBarControllerComponent {
         let videos = VideosComponent.navigationComponent(style: .grouped).downcast()
         let account = AccountComponent.navigationComponent(style: .plain).downcast()
         self.init([videos, account])
-        apply(style: Styles.view.default.promote())
+        apply(style: Styles.view.defaultBackground())
         unbox.tabBar.items?.first?.title = "Videos"
         unbox.tabBar.items?.last?.title = "Account"
     }

@@ -12,10 +12,26 @@ extension Styles {
     public enum view: ViewStyles { }
 }
 
+public protocol ViewConvertible {
+    var uiView: UIView { get }
+}
+
+extension UIView: ViewConvertible {
+    public var uiView: UIView {
+        return self
+    }
+}
+
+extension UIViewController: ViewConvertible {
+    public var uiView: UIView {
+        return view
+    }
+}
+
 public protocol ViewStyles: LayerStyles { }
 
 extension ViewStyles {
-    public static func background<T: UIView>(_ color: UIColor) -> Style<T> {
-        return .init { $0.backgroundColor = color }
+    public static func background<T: ViewConvertible>(_ color: UIColor) -> Style<T> {
+        return .init { $0.uiView.backgroundColor = color }
     }
 }

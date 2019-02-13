@@ -33,29 +33,3 @@ extension Style: Monoid {
         }
     }
 }
-
-extension Style where T == UIView {
-    public func promote<U: UIViewController>() -> Style<U> {
-        return Style<U> {
-            $0.view.map(self.apply)
-        }
-    }
-
-    public func promote<U: UIWindow>() -> Style<U> {
-        return Style<U> {
-            self.apply(to: $0)
-        }
-    }
-}
-
-extension Style where T == CALayer {
-    public func promote<U: UIView>() -> Style<U> {
-        return .init { self.apply(to: $0.layer) }
-    }
-}
-
-extension Style {
-    public func cast<U: UIView>() -> Style<U> {
-        return .init { self.apply(to: $0 as! T) }
-    }
-}
