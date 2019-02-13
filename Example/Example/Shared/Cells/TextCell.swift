@@ -11,6 +11,6 @@ import UIKit
 
 class TextCell: TableViewCell {
     func setText(_ text: String) {
-        textLabel?.text = text
+        Styles.table.cell.normal(text).apply(to: self)
     }
 }

@@ -12,6 +12,7 @@ import UIKit
 final class AccountComponent: TableViewControllerComponent<AccountItem> {
     required init(_ value: TableViewController) {
         super.init(value)
+        Styles.table.view.apply(to: value.tableView)
         value.title = "Account"
         value.onViewWillAppear = { [weak self] _ in self?.subscribe() }
         value.onViewDidDisappear = { [weak self] _ in self?.unsubscribe() }

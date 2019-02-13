@@ -9,11 +9,13 @@
 import UIKit
 
 extension Styles {
-    public static func axis(_ value: NSLayoutConstraint.Axis) -> Style<UIStackView> {
-        return .init { $0.axis = value }
-    }
+    public enum stack: ViewStyles {
+        public static func axis(_ value: NSLayoutConstraint.Axis) -> Style<UIStackView> {
+            return .init { $0.axis = value }
+        }
 
-    public static func spacing(_ value: CGFloat) -> Style<UIStackView> {
-        return .init { $0.spacing = value }
+        public static func spacing(_ value: CGFloat) -> Style<UIStackView> {
+            return .init { $0.spacing = value }
+        }
     }
 }

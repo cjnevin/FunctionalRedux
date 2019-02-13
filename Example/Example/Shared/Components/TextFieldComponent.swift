@@ -30,7 +30,7 @@ class TextFieldComponent: Component<UITextField> {
 
     func input(_ keyPath: KeyPath<AppState, String?>) {
         subscribe(keyPath) { [weak self] state in
-            self?.unbox.text = state
+            self.map(Styles.field.text(state).apply)
         }
     }
 
@@ -45,9 +45,7 @@ class TextFieldComponent: Component<UITextField> {
 
     func setAccessory(image: UIImage, action: @escaping () -> AppAction) {
         accessory = ButtonComponent {
-            $0.apply(style: Styles.background(.white).cast() <> Styles.image(image))
-            $0.unbox.imageEdgeInsets = UIEdgeInsets(top: 5, left: 5, bottom: 5, right: 10)
-            $0.unbox.frame = CGRect(origin: .zero, size: image.size.plus(x: 5, y: 0))
+            $0.apply(style: Styles.button.accessory(image))
             $0.setOnTap(action)
         }
     }

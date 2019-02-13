@@ -88,6 +88,8 @@
 		83ECC5E82212935C008B3FD8 /* Decodable+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83ECC5E72212935C008B3FD8 /* Decodable+Data.swift */; };
 		83ECC5EC221298A7008B3FD8 /* PrismLawTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83ECC5EB221298A7008B3FD8 /* PrismLawTests.swift */; };
 		83ECC5F022129E87008B3FD8 /* Either.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83ECC5EF22129E87008B3FD8 /* Either.swift */; };
+		83ECC6032214A387008B3FD8 /* StringStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83ECC6022214A387008B3FD8 /* StringStyles.swift */; };
+		83ECC6052214B9C0008B3FD8 /* TableViewStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83ECC6042214B9BF008B3FD8 /* TableViewStyles.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -221,6 +223,8 @@
 		83ECC5E72212935C008B3FD8 /* Decodable+Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Decodable+Data.swift"; sourceTree = "<group>"; };
 		83ECC5EB221298A7008B3FD8 /* PrismLawTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrismLawTests.swift; sourceTree = "<group>"; };
 		83ECC5EF22129E87008B3FD8 /* Either.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Either.swift; sourceTree = "<group>"; };
+		83ECC6022214A387008B3FD8 /* StringStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringStyles.swift; sourceTree = "<group>"; };
+		83ECC6042214B9BF008B3FD8 /* TableViewStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewStyles.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -348,8 +352,10 @@
 			children = (
 				83923A7A220F2A9500EE4AB6 /* ButtonStyles.swift */,
 				83923A70220F28E700EE4AB6 /* LayerStyles.swift */,
+				83ECC6042214B9BF008B3FD8 /* TableViewStyles.swift */,
 				83923A72220F290B00EE4AB6 /* TextFieldStyles.swift */,
 				83923A7C220F2AAF00EE4AB6 /* StackViewStyles.swift */,
+				83ECC6022214A387008B3FD8 /* StringStyles.swift */,
 				83923A85220F2E6100EE4AB6 /* ViewStyles.swift */,
 				83923AA7220F333100EE4AB6 /* Styles.swift */,
 			);
@@ -757,8 +763,10 @@
 				83923AB4220F39C000EE4AB6 /* Window.swift in Sources */,
 				83923AA2220F308500EE4AB6 /* ButtonStyles.swift in Sources */,
 				83923A9A220F2F3800EE4AB6 /* Component.swift in Sources */,
+				83ECC6032214A387008B3FD8 /* StringStyles.swift in Sources */,
 				83923AA3220F30A300EE4AB6 /* LayerStyles.swift in Sources */,
 				83923AA5220F30F000EE4AB6 /* StackViewStyles.swift in Sources */,
+				83ECC6052214B9C0008B3FD8 /* TableViewStyles.swift in Sources */,
 				83923AF02210221B00EE4AB6 /* CGSize+Extensions.swift in Sources */,
 				83923AD5220F5DE600EE4AB6 /* TabBarControllerComponent.swift in Sources */,
 				83923AB5220F3C3600EE4AB6 /* ViewController.swift in Sources */,

@@ -13,6 +13,7 @@ import UIKit
 final class VideosComponent: TableViewControllerComponent<VideoItem> {
     required init(_ value: TableViewController) {
         super.init(value)
+        Styles.table.view.apply(to: value.tableView)
         value.title = "Videos"
         value.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .trash, target: self, action: #selector(onTrash))
         value.onViewWillAppear = { [weak self] _ in self?.subscribe() }
@@ -49,12 +50,9 @@ final class VideosComponent: TableViewControllerComponent<VideoItem> {
     }
 }
 
-final class VideosCell: TextCell {
+final class VideosCell: TableViewCell {
     func setItem(_ item: VideoItem) {
-        setText(item.title)
-        textLabel?.textColor = item.isReady ? .black : .lightGray
-        textLabel?.font = item.isReady ? .systemFont(ofSize: 16) : .italicSystemFont(ofSize: 16)
-        selectionStyle = item.isReady ? .default : .none
+        item.titleStyle.apply(to: self)
     }
 }
 
@@ -70,12 +68,16 @@ enum VideoItem {
         return true
     }
 
-    var title: String {
+    private var _title: String {
         switch self {
         case .video(let video): return video.title
         case .download(let download): return download.video.title + (download.isComplete ? "" : " \(download.progress)%")
         case .watched(let text): return text
         }
+    }
+
+    var titleStyle: Style<VideosCell> {
+        return Styles.table.cell.style(_title, isEnabled: isReady)
     }
 }
 

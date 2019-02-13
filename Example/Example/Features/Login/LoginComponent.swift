@@ -12,19 +12,19 @@ import UIKit
 
 final class LoginComponent: ViewControllerComponent {
     private lazy var email = TextFieldComponent {
-        $0.apply(style: Styles.emailStyle)
+        $0.apply(style: Styles.field.email)
         $0.input(\.accountState.loginState.email)
         $0.setOnChange { .loginFormAction(.setEmail($0)) }
         $0.setOnReturn { [weak self] in self?.password.unbox.becomeFirstResponder() }
     }
     private lazy var password = TextFieldComponent {
-        $0.apply(style: Styles.passwordStyle)
+        $0.apply(style: Styles.field.password)
         $0.input(\.accountState.loginState.password)
         $0.setOnChange { .loginFormAction(.setPassword($0)) }
         $0.setOnReturn { [weak self] in self?.submit.onTapEvent() }
     }
     private lazy var submit = ButtonComponent {
-        $0.apply(style: Styles.submitStyle)
+        $0.apply(style: Styles.button.submit)
         $0.isEnabled(\.accountState.loginState.canLogIn)
         $0.setOnTap { [weak self] in
             self?.stackView.resignFirstResponders()
@@ -33,7 +33,7 @@ final class LoginComponent: ViewControllerComponent {
     }
     private lazy var stackView: Component<UIStackView> = {
         let stack = Component(UIStackView())
-        stack.apply(style: Styles.verticalStackStyle)
+        stack.apply(style: Styles.stack.vertical)
         stack.addSubview(email, constraints: height(equalTo: 44))
         stack.addSubview(password, constraints: height(equalTo: 44))
         stack.addSubview(submit, constraints: height(equalTo: 60))
@@ -48,7 +48,7 @@ final class LoginComponent: ViewControllerComponent {
         value.onViewWillAppear = { [weak self] _ in self?.subscribe() }
         value.onViewDidDisappear = { [weak self] _ in self?.unsubscribe() }
 
-        apply(style: Styles.whiteViewStyle.promote())
+        apply(style: Styles.view.default.promote())
         view?.addSubview(stackView, constraints: equalTopSafeArea(offset: 20) <> equalHorizontalEdges(offset: 20))
         view?.addSubview(loadingView, constraints: equalEdges())
     }
@@ -64,7 +64,7 @@ final class LoginComponent: ViewControllerComponent {
                 assertionFailure("Missing image")
                 return
             }
-            self?.password.apply(style: Styles.isSecure(!revealed))
+            self?.password.apply(style: Styles.field.isSecure(!revealed))
             self?.password.setAccessory(image: image) {
                 return .loginFormAction(.revealPassword(!revealed))
             }

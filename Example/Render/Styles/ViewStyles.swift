@@ -9,7 +9,13 @@
 import UIKit
 
 extension Styles {
-    public static func background(_ color: UIColor) -> Style<UIView> {
+    public enum view: ViewStyles { }
+}
+
+public protocol ViewStyles: LayerStyles { }
+
+extension ViewStyles {
+    public static func background<T: UIView>(_ color: UIColor) -> Style<T> {
         return .init { $0.backgroundColor = color }
     }
 }

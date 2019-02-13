@@ -10,15 +10,17 @@ import Core
 import UIKit
 
 extension Styles {
-    public static func title(_ text: String?, for state: UIControl.State = .normal) -> Style<UIButton> {
-        return .init { $0.setTitle(text, for: state) }
-    }
-
-    public static func titleColor(_ color: UIColor, for state: UIControl.State = .normal) -> Style<UIButton> {
-        return .init { $0.setTitleColor(color, for: state) }
-    }
-
-    public static func image(_ image: UIImage?, for state: UIControl.State = .normal) -> Style<UIButton> {
-        return .init { $0.setImage(image, for: state) }
+    public enum button: StringStyles, ViewStyles {
+        public static func title(_ text: String?, for state: UIControl.State = .normal) -> Style<UIButton> {
+            return .init { $0.setTitle(text, for: state) }
+        }
+        
+        public static func titleColor(_ color: UIColor, for state: UIControl.State = .normal) -> Style<UIButton> {
+            return .init { $0.setTitleColor(color, for: state) }
+        }
+        
+        public static func image(_ image: UIImage?, for state: UIControl.State = .normal) -> Style<UIButton> {
+            return .init { $0.setImage(image, for: state) }
+        }
     }
 }

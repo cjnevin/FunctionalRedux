@@ -9,15 +9,37 @@
 import UIKit
 
 extension Styles {
-    public static func border(width: CGFloat) -> Style<CALayer> {
-        return .init { $0.borderWidth = width }
+    public enum layer: LayerStyles { }
+}
+
+public protocol LayerConvertible {
+    var caLayer: CALayer { get }
+}
+
+extension CALayer: LayerConvertible {
+    public var caLayer: CALayer {
+        return self
+    }
+}
+
+extension UIView: LayerConvertible {
+    public var caLayer: CALayer {
+        return layer
+    }
+}
+
+public protocol LayerStyles { }
+
+extension LayerStyles {
+    public static func border<T: LayerConvertible>(width: CGFloat) -> Style<T> {
+        return .init { $0.caLayer.borderWidth = width }
     }
 
-    public static func border(color: UIColor) -> Style<CALayer> {
-        return .init { $0.borderColor = color.cgColor }
+    public static func border<T: LayerConvertible>(color: UIColor) -> Style<T> {
+        return .init { $0.caLayer.borderColor = color.cgColor }
     }
 
-    public static func corner(radius: CGFloat) -> Style<CALayer> {
-        return .init { $0.cornerRadius = radius }
+    public static func corner<T: LayerConvertible>(radius: CGFloat) -> Style<T> {
+        return .init { $0.caLayer.cornerRadius = radius }
     }
 }
