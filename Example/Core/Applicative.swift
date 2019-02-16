@@ -1,10 +1,10 @@
 import Foundation
 
-precedencegroup Applicative {
+precedencegroup ApplicativePrecedence {
     associativity: left
 }
 
-infix operator <*>: Applicative
+infix operator <*>: ApplicativePrecedence
 
 public func <*> <A, B>(f: ((A) -> B)?, x: A?) -> B? {
     return apply(f, to: x)
