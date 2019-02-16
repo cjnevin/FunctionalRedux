@@ -10,9 +10,7 @@ public final class Store<S, A, E: Monoid> {
     private var token = (0...).makeIterator()
 
     private var currentState: S {
-        didSet {
-            self.subscribers.values.forEach { $0(self.currentState) }
-        }
+        didSet { self.subscribers.values.forEach { $0(self.currentState) } }
     }
     
     public init(reducer: Reducer<S, A, E>, initialState: S, interpreter: @escaping Interpreter) {
@@ -24,17 +22,17 @@ public final class Store<S, A, E: Monoid> {
     public func dispatch(_ action: A) {
         assert(Thread.isMainThread)
         let effect = self.reducer.reduce(&self.currentState, action)
-        self.interpreter({ self.currentState }, effect, dispatch)
+        self.interpreter({ self.currentState }, effect, self.dispatch)
     }
     
     public func subscribe(_ subscriber: @escaping (S) -> Void) -> Token {
-        let tkn = token.next()!
-        subscribers[tkn] = subscriber
+        let tkn = self.token.next()!
+        self.subscribers[tkn] = subscriber
         subscriber(self.currentState)
         return tkn
     }
 
     public func unsubscribe(_ token: Token) {
-        subscribers.removeValue(forKey: token)
+        self.subscribers.removeValue(forKey: token)
     }
 }

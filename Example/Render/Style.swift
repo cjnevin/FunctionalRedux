@@ -17,7 +17,7 @@ public struct Style<T> {
     }
 
     public func apply(to candidate: T) {
-        callback(candidate)
+        callback <*> candidate
     }
 }
 

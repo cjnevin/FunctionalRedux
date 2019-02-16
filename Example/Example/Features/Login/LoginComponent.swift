@@ -34,9 +34,9 @@ final class LoginComponent: ViewControllerComponent {
     private lazy var stackView: Component<UIStackView> = {
         let stack = Component(UIStackView())
         stack.apply(style: Styles.stack.vertical)
-        stack.addSubview(email, constraints: height(equalTo: 44))
-        stack.addSubview(password, constraints: height(equalTo: 44))
-        stack.addSubview(submit, constraints: height(equalTo: 60))
+        stack.addSubview(email, constraints: .height(equalTo: 44))
+        stack.addSubview(password, constraints: .height(equalTo: 44))
+        stack.addSubview(submit, constraints: .height(equalTo: 60))
         return stack
     }()
     private lazy var loadingView = LoadingComponent()
@@ -49,8 +49,8 @@ final class LoginComponent: ViewControllerComponent {
         value.onViewDidDisappear = { [weak self] _ in self?.unsubscribe() }
 
         apply(style: Styles.view.defaultBackground())
-        view?.addSubview(stackView, constraints: equalTopSafeArea(offset: 20) <> equalHorizontalEdges(offset: 20))
-        view?.addSubview(loadingView, constraints: equalEdges())
+        view?.addSubview(stackView, constraints: .equalTopSafeArea(offset: 20) <> .equalHorizontalEdges(offset: 20))
+        view?.addSubview(loadingView, constraints: .equalEdges())
     }
 
     private func subscribe() {

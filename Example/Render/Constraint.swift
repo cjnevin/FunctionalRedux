@@ -26,93 +26,95 @@ extension Constraint: Semigroup {
     }
 }
 
-public func height(equalTo: CGFloat = 0) -> Constraint {
-    return .init { _, child in
-        [child.heightAnchor.constraint(equalToConstant: equalTo)]
+extension Constraint {
+    public static func height(equalTo: CGFloat = 0) -> Constraint {
+        return .init { _, child in
+            [child.heightAnchor.constraint(equalToConstant: equalTo)]
+        }
     }
-}
 
-public func height(lessThan: CGFloat = 0) -> Constraint {
-    return .init { _, child in
-        [child.heightAnchor.constraint(lessThanOrEqualToConstant: lessThan)]
+    public static func height(lessThan: CGFloat = 0) -> Constraint {
+        return .init { _, child in
+            [child.heightAnchor.constraint(lessThanOrEqualToConstant: lessThan)]
+        }
     }
-}
 
-public func relativeHeight(multiplier: CGFloat = 0) -> Constraint {
-    return .init { parent, child in
-        [child.heightAnchor.constraint(equalTo: parent.heightAnchor, multiplier: multiplier)]
+    public static func relativeHeight(multiplier: CGFloat = 0) -> Constraint {
+        return .init { parent, child in
+            [child.heightAnchor.constraint(equalTo: parent.heightAnchor, multiplier: multiplier)]
+        }
     }
-}
 
-public func equalEdges(offset: CGFloat = 0) -> Constraint {
-    return equalHorizontalEdges(offset: offset)
-        <> equalVerticalEdges(offset: offset)
-}
-
-public func equalHorizontalEdges(offset: CGFloat = 0) -> Constraint {
-    return equalLeading(offset: offset)
-        <> equalTrailing(offset: -offset)
-}
-
-public func equalVerticalEdges(offset: CGFloat = 0) -> Constraint {
-    return equalTop(offset: offset)
-        <> equalBottom(offset: -offset)
-}
-
-public func equalTop(offset: CGFloat = 0) -> Constraint {
-    return .init { parent, child in
-        [child.topAnchor.constraint(equalTo: parent.topAnchor, constant: offset)]
+    public static func equalEdges(offset: CGFloat = 0) -> Constraint {
+        return equalHorizontalEdges(offset: offset)
+            <> equalVerticalEdges(offset: offset)
     }
-}
 
-public func equalBottom(offset: CGFloat = 0) -> Constraint {
-    return .init { parent, child in
-        [child.bottomAnchor.constraint(equalTo: parent.bottomAnchor, constant: offset)]
+    public static func equalHorizontalEdges(offset: CGFloat = 0) -> Constraint {
+        return equalLeading(offset: offset)
+            <> equalTrailing(offset: -offset)
     }
-}
 
-public func equalTopSafeArea(offset: CGFloat = 0) -> Constraint {
-    return .init { parent, child in
-        [child.topAnchor.constraint(equalTo: parent.safeAreaLayoutGuide.topAnchor, constant: offset)]
+    public static func equalVerticalEdges(offset: CGFloat = 0) -> Constraint {
+        return equalTop(offset: offset)
+            <> equalBottom(offset: -offset)
     }
-}
 
-public func equalBottomSafeArea(offset: CGFloat = 0) -> Constraint {
-    return .init { parent, child in
-        [child.bottomAnchor.constraint(equalTo: parent.safeAreaLayoutGuide.bottomAnchor, constant: offset)]
+    public static func equalTop(offset: CGFloat = 0) -> Constraint {
+        return .init { parent, child in
+            [child.topAnchor.constraint(equalTo: parent.topAnchor, constant: offset)]
+        }
     }
-}
 
-public func equalLeading(offset: CGFloat = 0) -> Constraint {
-    return .init { parent, child in
-        [child.leadingAnchor.constraint(equalTo: parent.leadingAnchor, constant: offset)]
+    public static func equalBottom(offset: CGFloat = 0) -> Constraint {
+        return .init { parent, child in
+            [child.bottomAnchor.constraint(equalTo: parent.bottomAnchor, constant: offset)]
+        }
     }
-}
-public func equalTrailing(offset: CGFloat = 0) -> Constraint {
-    return .init { parent, child in
-        [child.trailingAnchor.constraint(equalTo: parent.trailingAnchor, constant: offset)]
+
+    public static func equalTopSafeArea(offset: CGFloat = 0) -> Constraint {
+        return .init { parent, child in
+            [child.topAnchor.constraint(equalTo: parent.safeAreaLayoutGuide.topAnchor, constant: offset)]
+        }
     }
-}
 
-public func equalCenterX(offset: CGFloat = 0) -> Constraint {
-    return .init { parent, child in
-        [child.centerXAnchor.constraint(equalTo: parent.centerXAnchor, constant: offset)]
+    public static func equalBottomSafeArea(offset: CGFloat = 0) -> Constraint {
+        return .init { parent, child in
+            [child.bottomAnchor.constraint(equalTo: parent.safeAreaLayoutGuide.bottomAnchor, constant: offset)]
+        }
     }
-}
 
-public func equalCenterY(offset: CGFloat = 0) -> Constraint {
-    return .init { parent, child in
-        [child.centerYAnchor.constraint(equalTo: parent.centerYAnchor, constant: offset)]
+    public static func equalLeading(offset: CGFloat = 0) -> Constraint {
+        return .init { parent, child in
+            [child.leadingAnchor.constraint(equalTo: parent.leadingAnchor, constant: offset)]
+        }
     }
-}
+    public static func equalTrailing(offset: CGFloat = 0) -> Constraint {
+        return .init { parent, child in
+            [child.trailingAnchor.constraint(equalTo: parent.trailingAnchor, constant: offset)]
+        }
+    }
 
-public func equalCenter(offset: CGFloat = 0) -> Constraint {
-    return equalCenterX(offset: offset)
-        <> equalCenterY(offset: offset)
-}
+    public static func equalCenterX(offset: CGFloat = 0) -> Constraint {
+        return .init { parent, child in
+            [child.centerXAnchor.constraint(equalTo: parent.centerXAnchor, constant: offset)]
+        }
+    }
 
-public func equalRight(offset: CGFloat = 0) -> Constraint {
-    return .init { parent, child in
-        [child.rightAnchor.constraint(equalTo: parent.rightAnchor, constant: offset)]
+    public static func equalCenterY(offset: CGFloat = 0) -> Constraint {
+        return .init { parent, child in
+            [child.centerYAnchor.constraint(equalTo: parent.centerYAnchor, constant: offset)]
+        }
+    }
+
+    public static func equalCenter(offset: CGFloat = 0) -> Constraint {
+        return equalCenterX(offset: offset)
+            <> equalCenterY(offset: offset)
+    }
+
+    public static func equalRight(offset: CGFloat = 0) -> Constraint {
+        return .init { parent, child in
+            [child.rightAnchor.constraint(equalTo: parent.rightAnchor, constant: offset)]
+        }
     }
 }
