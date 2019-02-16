@@ -71,5 +71,3 @@ An example may be `equalTop(offset: 20)` which means the `child` will sit 20pt b
 ### Style
 
 Holds a function that applies a style to a particular object when the `apply` method is called. Styles can be composed as they adhere to the `Semigroup` protocol.
-
-`UIView` styles can be applied to `UIViewController`'s views or `UIWindow`'s by calling `promote`.
