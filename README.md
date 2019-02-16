@@ -2,6 +2,8 @@
 
 Redux implementation with type-safety and deferred side-effects with a single point for dependency injection.
 
+![Image of Redux](https://github.com/ChrisAU/FunctionalRedux/blob/master/Redux-2.png)
+
 ## Store
 
 The store holds the latest version of the (S)tate, dispatches (A)ctions to the reducer, notifies subscribers when the (S)tate changes, and calls the interpreter with any (E)ffects that are produced.
