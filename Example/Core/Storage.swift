@@ -22,7 +22,7 @@ extension Storage: Semigroup {
     /// Assumption: Right hand side is ultimate source of truth (i.e. disk),
     /// left hand side is (faster) buffer.
     public func combine(with other: Storage) -> Storage {
-        return Storage.init(get: {
+        return Storage(get: {
             if let left = self.get() {
                 other.set(left)
                 return left

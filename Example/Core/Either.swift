@@ -23,7 +23,7 @@ extension Either {
 }
 
 public func either<A, B, C>(_ lhs: Prism<A, B>, _ rhs: Prism<A, C>) -> Prism<A, Either<B, C>> {
-    return Prism<A, Either<B, C>>.init(
+    return Prism<A, Either<B, C>>(
         preview: {
             lhs.preview($0).map(Either.left) ?? rhs.preview($0).map(Either.right)
     },

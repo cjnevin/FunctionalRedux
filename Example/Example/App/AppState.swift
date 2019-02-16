@@ -34,7 +34,7 @@ let appReducer = accountReducer
         state: lens(\AppState.accountState.loginState),
         action: AppAction.prism.loginFormAction)
     <> videoReducer.lift(
-        state: both(lens(\.videosState), lens(\.accountState.settings.notificationsOn)),
+        state: pair(lens(\.videosState), lens(\.accountState.settings.notificationsOn)),
         action: AppAction.prism.videosAction)
 
 extension AppAction {

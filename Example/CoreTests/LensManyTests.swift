@@ -30,7 +30,7 @@ class LensManyTests: XCTestCase {
     }
 
     private var bothLens: Lens<A, (Int, Int)> {
-        return both(lens(\A.b), lens(\A.c))
+        return pair(lens(\A.b), lens(\A.c))
     }
 
     func testBothView() {
