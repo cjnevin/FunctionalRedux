@@ -26,6 +26,16 @@ func appInterpreter(_ deps: Dependencies) -> AppStore.Interpreter {
             deps.request(endpoint.request).map(endpoint.actions).onResult { (actions) in
                 actions.forEach(dispatch)
             }
+        case .notification(.enable):
+            deps.notification.enable { authorized in
+                DispatchQueue.main.async {
+                    dispatch(AppAction.accountAction(.enabledNotifications(authorized)))
+                }
+            }
+        case .notification(.disable):
+            deps.notification.disable()
+        case let .notification(.send(title, body, period)):
+            deps.notification.send(title: title, body: body, after: period)
         case let .log(text):
             deps.log("[Logger] \(text)")
         case let .track(event):

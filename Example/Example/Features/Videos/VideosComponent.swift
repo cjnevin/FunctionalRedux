@@ -23,7 +23,7 @@ final class VideosComponent: TableViewControllerComponent<VideoItem> {
     }
 
     private func subscribe() {
-        subscribe(\AppState.sections) { [weak self] sections in
+        subscribe(\AppState.videosState.sections) { [weak self] sections in
             self?.sections = sections
         }
     }
@@ -81,12 +81,12 @@ enum VideoItem {
     }
 }
 
-private extension AppState {
+private extension VideosState {
     var sections: [TableViewSection<VideoItem>] {
         return [
-            TableViewSection(title: "Available", items: videosState.videos.map(VideoItem.video)),
-            TableViewSection(title: downloadedVideos.isEmpty ? nil : "Downloads", items: downloadedVideos.map(VideoItem.download)),
-            TableViewSection(title: watchedVideos.isEmpty ? nil : "Watched", items: watchedVideos.items())
+            TableViewSection(title: "Available", items: available.map(VideoItem.video)),
+            TableViewSection(title: downloaded.isEmpty ? nil : "Downloads", items: downloaded.map(VideoItem.download)),
+            TableViewSection(title: watched.isEmpty ? nil : "Watched", items: watched.items())
         ]
     }
 }

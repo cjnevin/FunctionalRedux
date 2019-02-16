@@ -19,8 +19,6 @@ enum AppAction {
 struct AppState: Codable {
     var videosState: VideosState = .init()
     var accountState: AccountState = .init()
-    var watchedVideos: [Video] = []
-    var downloadedVideos: [VideoDownload] = []
 }
 
 let appReducer = accountReducer
@@ -36,7 +34,7 @@ let appReducer = accountReducer
         state: lens(\AppState.accountState.loginState),
         action: AppAction.prism.loginFormAction)
     <> videoReducer.lift(
-        state: many(lens(\.videosState), lens(\.watchedVideos), lens(\.downloadedVideos)),
+        state: both(lens(\.videosState), lens(\.accountState.settings.notificationsOn)),
         action: AppAction.prism.videosAction)
 
 extension AppAction {

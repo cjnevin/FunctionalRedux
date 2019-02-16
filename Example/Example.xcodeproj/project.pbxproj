@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		830ACD7D22187F49000F7BD9 /* Notifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = 830ACD7C22187F49000F7BD9 /* Notifications.swift */; };
 		8365E12E2203839400074C21 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8365E12D2203839400074C21 /* AppDelegate.swift */; };
 		8365E1352203839500074C21 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8365E1342203839500074C21 /* Assets.xcassets */; };
 		8365E1382203839500074C21 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8365E1362203839500074C21 /* LaunchScreen.storyboard */; };
@@ -30,7 +31,6 @@
 		8365E1B222038F7A00074C21 /* AppEffect.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8365E1B122038F7A00074C21 /* AppEffect.swift */; };
 		8365E1B62203901B00074C21 /* AppInterpreter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8365E1B52203901B00074C21 /* AppInterpreter.swift */; };
 		8365E1B82203909B00074C21 /* AppStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8365E1B72203909B00074C21 /* AppStore.swift */; };
-		8388F44422079A9B00907FD2 /* Affine.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8388F44322079A9B00907FD2 /* Affine.swift */; };
 		83923A82220F2B8500EE4AB6 /* LoginComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83923A81220F2B8500EE4AB6 /* LoginComponent.swift */; };
 		83923A90220F2F1400EE4AB6 /* Render.h in Headers */ = {isa = PBXBuildFile; fileRef = 83923A8E220F2F1400EE4AB6 /* Render.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		83923A93220F2F1400EE4AB6 /* Render.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 83923A8C220F2F1400EE4AB6 /* Render.framework */; };
@@ -139,6 +139,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		830ACD7C22187F49000F7BD9 /* Notifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notifications.swift; sourceTree = "<group>"; };
 		8365E12A2203839400074C21 /* Example.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Example.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8365E12D2203839400074C21 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		8365E1342203839500074C21 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -164,7 +165,6 @@
 		8365E1B122038F7A00074C21 /* AppEffect.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEffect.swift; sourceTree = "<group>"; };
 		8365E1B52203901B00074C21 /* AppInterpreter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppInterpreter.swift; sourceTree = "<group>"; };
 		8365E1B72203909B00074C21 /* AppStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStore.swift; sourceTree = "<group>"; };
-		8388F44322079A9B00907FD2 /* Affine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Affine.swift; sourceTree = "<group>"; };
 		8388F4462207A10000907FD2 /* TextFieldComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldComponent.swift; sourceTree = "<group>"; };
 		83923A65220F0E7000EE4AB6 /* ButtonComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ButtonComponent.swift; sourceTree = "<group>"; };
 		83923A67220F284D00EE4AB6 /* Component.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Component.swift; sourceTree = "<group>"; };
@@ -302,7 +302,6 @@
 			children = (
 				83923AAD220F375D00EE4AB6 /* Extensions */,
 				8365E146220383DD00074C21 /* Core.h */,
-				8388F44322079A9B00907FD2 /* Affine.swift */,
 				8365E162220383F500074C21 /* Applicative.swift */,
 				83ECC5EF22129E87008B3FD8 /* Either.swift */,
 				83ECC5D32212237C008B3FD8 /* Expectation.swift */,
@@ -315,8 +314,8 @@
 				8365E1692203841100074C21 /* Result.swift */,
 				8365E16B2203841100074C21 /* Semigroup.swift */,
 				83ECC5CF22121F2F008B3FD8 /* Semiring.swift */,
-				8365E1642203841100074C21 /* Store.swift */,
 				83923AED221014AF00EE4AB6 /* Storage.swift */,
+				8365E1642203841100074C21 /* Store.swift */,
 				8365E147220383DD00074C21 /* Info.plist */,
 			);
 			path = Core;
@@ -428,6 +427,7 @@
 				8365E1AB22038E9600074C21 /* Dependencies.swift */,
 				8365E1A42203898700074C21 /* Analytics.swift */,
 				8365E1772203846F00074C21 /* Api.swift */,
+				830ACD7C22187F49000F7BD9 /* Notifications.swift */,
 				8365E1A02203869400074C21 /* Storage.swift */,
 			);
 			path = Dependencies;
@@ -712,6 +712,7 @@
 				83923AF3221026C400EE4AB6 /* LoadingComponent.swift in Sources */,
 				8365E1B82203909B00074C21 /* AppStore.swift in Sources */,
 				8365E1B62203901B00074C21 /* AppInterpreter.swift in Sources */,
+				830ACD7D22187F49000F7BD9 /* Notifications.swift in Sources */,
 				83923AEC220F933B00EE4AB6 /* AppStyles.swift in Sources */,
 				8365E1AA22038E8600074C21 /* AppState.swift in Sources */,
 				8365E1B222038F7A00074C21 /* AppEffect.swift in Sources */,
@@ -730,7 +731,6 @@
 			files = (
 				83ECC5DA2212339B008B3FD8 /* Collection+Permutations.swift in Sources */,
 				83ECC5D42212237C008B3FD8 /* Expectation.swift in Sources */,
-				8388F44422079A9B00907FD2 /* Affine.swift in Sources */,
 				83ECC5D022121F2F008B3FD8 /* Semiring.swift in Sources */,
 				8365E16E2203841200074C21 /* Prism.swift in Sources */,
 				8365E163220383F500074C21 /* Applicative.swift in Sources */,

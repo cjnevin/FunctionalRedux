@@ -13,4 +13,5 @@ struct Dependencies {
     let track = createAnalytics(with: FakeTracker())
     let store = getStorage()
     let log: (Any) -> Void = { value in print(value) }
+    let notification: NotificationHandler = NotificationManager()
 }

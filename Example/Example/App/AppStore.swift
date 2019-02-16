@@ -25,7 +25,9 @@ private func getDefaultState() -> AppState {
     let video3 = Video(id: 3, title: "The Matrix Revolutions", videoUrl: "matrix3.mp4")
     return .init(
         videosState: VideosState(
-            videos: [video1, video2, video3]
+            available: [video1, video2, video3],
+            downloaded: [],
+            watched: []
         ),
         accountState: AccountState(
             loginState: .init(email: nil,
@@ -35,8 +37,6 @@ private func getDefaultState() -> AppState {
                               failed: false),
             loggedInUser: nil,
             settings: .init(notificationsOn: false)
-        ),
-        watchedVideos: [],
-        downloadedVideos: []
+        )
     )
 }

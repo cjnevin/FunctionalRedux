@@ -3,14 +3,16 @@ import Foundation
 public enum Result<E, A> {
     case success(A)
     case failure(E)
-    
+
+    /// Functor
     public func map<B>(_ f: (A) -> B) -> Result<E, B> {
         switch self {
         case let .success(x): return .success(f(x))
         case let .failure(e): return .failure(e)
         }
     }
-    
+
+    /// Monad
     public func flatMap<B>(_ f: (A) -> Result<E, B>) -> Result<E, B> {
         switch self {
         case let .success(x): return f(x)

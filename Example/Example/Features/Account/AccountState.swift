@@ -16,6 +16,7 @@ struct Settings: Codable {
 enum AccountAction {
     case tappedLogout
     case tappedNotification(on: Bool)
+    case enabledNotifications(Bool)
 }
 
 struct AccountState: Codable {
@@ -31,6 +32,13 @@ let accountReducer = Reducer<AccountState, AccountAction, AppEffect> { state, ac
         return .log("Logged out")
             <> .save
     case let.tappedNotification(on):
+        if on {
+            return .notification(.enable)
+        } else {
+            state.settings.notificationsOn = on
+            return .save
+        }
+    case let .enabledNotifications(on):
         state.settings.notificationsOn = on
         return .save
     }

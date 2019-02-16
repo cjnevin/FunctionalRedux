@@ -14,6 +14,7 @@ indirect enum AppEffect {
     case delay(AppEffect, TimeInterval)
     case action(AppAction)
     case api(ApiEndpoint)
+    case notification(Notification)
     case log(String)
     case save
     case track(AnalyticsEvent)
