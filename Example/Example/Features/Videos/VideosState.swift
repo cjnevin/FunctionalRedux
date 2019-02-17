@@ -80,7 +80,6 @@ private extension AppEffect {
             while copy.progress < 100 {
                 copy.incrementProgress()
                 values.append(copy)
-                print(copy.progress)
             }
             return values
         }
