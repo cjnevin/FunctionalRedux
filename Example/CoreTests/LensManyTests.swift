@@ -55,33 +55,32 @@ class LensManyTests: XCTestCase {
         assert(c).is(equalTo(4))
     }
 
-    private var manyLens: Lens<A, (Int, Int, Int)> {
-        return many(lens(\A.b), lens(\A.c), lens(\A.d))
+    private var tripleLens: Lens<A, (Int, Int, Int)> {
+        return triple(lens(\A.b), lens(\A.c), lens(\A.d))
     }
 
-    func testManyView() {
-        let (b, c, d) = manyLens.view(sut)
+    func testTripleView() {
+        let (b, c, d) = tripleLens.view(sut)
         assert(b).is(equalTo(1))
         assert(c).is(equalTo(2))
         assert(d).is(equalTo(3))
     }
 
-    func testManySet() {
-        let _many = manyLens
-        sut = _many.set(sut, (3, 4, 5))
-        let (b, c, d) = _many.view(sut)
+    func testTripleSet() {
+        let _triple = tripleLens
+        sut = _triple.set(sut, (3, 4, 5))
+        let (b, c, d) = _triple.view(sut)
         assert(b).is(equalTo(3))
         assert(c).is(equalTo(4))
         assert(d).is(equalTo(5))
     }
 
-    func testManyMutatingSet() {
-        let _many = manyLens
-        _many.mutatingSet(&sut, (3, 4, 5))
-        let (b, c, d) = _many.view(sut)
+    func testTripleMutatingSet() {
+        let _triple = tripleLens
+        _triple.mutatingSet(&sut, (3, 4, 5))
+        let (b, c, d) = _triple.view(sut)
         assert(b).is(equalTo(3))
         assert(c).is(equalTo(4))
         assert(d).is(equalTo(5))
     }
-
 }

@@ -87,7 +87,6 @@
 		83ECC5E62212445B008B3FD8 /* PredicateTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83ECC5E52212445B008B3FD8 /* PredicateTests.swift */; };
 		83ECC5E82212935C008B3FD8 /* Decodable+Data.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83ECC5E72212935C008B3FD8 /* Decodable+Data.swift */; };
 		83ECC5EC221298A7008B3FD8 /* PrismLawTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83ECC5EB221298A7008B3FD8 /* PrismLawTests.swift */; };
-		83ECC5F022129E87008B3FD8 /* Either.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83ECC5EF22129E87008B3FD8 /* Either.swift */; };
 		83ECC6032214A387008B3FD8 /* StringStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83ECC6022214A387008B3FD8 /* StringStyles.swift */; };
 		83ECC6052214B9C0008B3FD8 /* TableViewStyles.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83ECC6042214B9BF008B3FD8 /* TableViewStyles.swift */; };
 /* End PBXBuildFile section */
@@ -222,7 +221,6 @@
 		83ECC5E52212445B008B3FD8 /* PredicateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PredicateTests.swift; sourceTree = "<group>"; };
 		83ECC5E72212935C008B3FD8 /* Decodable+Data.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Decodable+Data.swift"; sourceTree = "<group>"; };
 		83ECC5EB221298A7008B3FD8 /* PrismLawTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrismLawTests.swift; sourceTree = "<group>"; };
-		83ECC5EF22129E87008B3FD8 /* Either.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Either.swift; sourceTree = "<group>"; };
 		83ECC6022214A387008B3FD8 /* StringStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StringStyles.swift; sourceTree = "<group>"; };
 		83ECC6042214B9BF008B3FD8 /* TableViewStyles.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewStyles.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -303,7 +301,6 @@
 				83923AAD220F375D00EE4AB6 /* Extensions */,
 				8365E146220383DD00074C21 /* Core.h */,
 				8365E162220383F500074C21 /* Applicative.swift */,
-				83ECC5EF22129E87008B3FD8 /* Either.swift */,
 				83ECC5D32212237C008B3FD8 /* Expectation.swift */,
 				8365E1672203841100074C21 /* Future.swift */,
 				8365E1662203841100074C21 /* Lens.swift */,
@@ -744,7 +741,6 @@
 				8365E1742203841200074C21 /* Semigroup.swift in Sources */,
 				8365E1702203841200074C21 /* Future.swift in Sources */,
 				8365E16F2203841200074C21 /* Lens.swift in Sources */,
-				83ECC5F022129E87008B3FD8 /* Either.swift in Sources */,
 				83923AEE221014AF00EE4AB6 /* Storage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
