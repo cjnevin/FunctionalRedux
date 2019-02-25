@@ -9,27 +9,25 @@
 import Core
 import Foundation
 
-public struct Style<T> {
-    private let callback: (T) -> Void
+public typealias Style<A> = Function<A, Void>
 
-    public init(_ callback: @escaping (T) -> Void) {
-        self.callback = callback
-    }
-
-    public func apply(to candidate: T) {
-        callback <*> candidate
+extension Function where B == Void {
+    public func apply(to candidate: A) {
+        execute(candidate)
     }
 }
 
-extension Style: Monoid {
-    public static var empty: Style<T> {
-        return .init { _ in }
-    }
-    
-    public func combine(with other: Style) -> Style {
-        return Style {
-            self.callback($0)
-            other.callback($0)
+extension Function: Semigroup where B == Void {
+    public func combine(with other: Function) -> Function {
+        return Function {
+            self.execute($0)
+            other.execute($0)
         }
+    }
+}
+
+extension Function: Monoid where B == Void {
+    public static var empty: Function {
+        return .init { _ in }
     }
 }

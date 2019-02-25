@@ -34,28 +34,20 @@ extension Int: Semiring {
     public static let one = 1
 }
 
-public struct FunctionS<A, S: Semiring> {
-    public let execute: (A) -> S
-
-    public init(_ execute: @escaping (A) -> S) {
-        self.execute = execute
-    }
-}
-
-extension FunctionS: Semiring {
-    public static func + (lhs: FunctionS, rhs: FunctionS) -> FunctionS {
-        return FunctionS { lhs.execute($0) + rhs.execute($0) }
+extension Function: Semiring where B: Semiring {
+    public static func + (lhs: Function, rhs: Function) -> Function {
+        return Function { lhs.execute($0) + rhs.execute($0) }
     }
 
-    public static func * (lhs: FunctionS, rhs: FunctionS) -> FunctionS {
-        return FunctionS { lhs.execute($0) * rhs.execute($0) }
+    public static func * (lhs: Function, rhs: Function) -> Function {
+        return Function { lhs.execute($0) * rhs.execute($0) }
     }
 
-    public static var zero: FunctionS {
-        return FunctionS { _ in S.zero }
+    public static var zero: Function {
+        return Function { _ in B.zero }
     }
 
-    public static var one: FunctionS {
-        return FunctionS { _ in S.one }
+    public static var one: Function {
+        return Function { _ in B.one }
     }
 }

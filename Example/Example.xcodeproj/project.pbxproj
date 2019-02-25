@@ -71,6 +71,7 @@
 		83923AF02210221B00EE4AB6 /* CGSize+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83923AEF2210221B00EE4AB6 /* CGSize+Extensions.swift */; };
 		83923AF3221026C400EE4AB6 /* LoadingComponent.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83923AF2221026C400EE4AB6 /* LoadingComponent.swift */; };
 		83923AF522102E7E00EE4AB6 /* VisualEffectView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83923AF422102E7E00EE4AB6 /* VisualEffectView.swift */; };
+		83D78AA92222D7250043A175 /* Function.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83D78AA82222D7250043A175 /* Function.swift */; };
 		83ECC5C722121E3B008B3FD8 /* Core.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8365E144220383DD00074C21 /* Core.framework */; };
 		83ECC5CE22121E5B008B3FD8 /* SemigroupLawTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83ECC5CD22121E5B008B3FD8 /* SemigroupLawTests.swift */; };
 		83ECC5D022121F2F008B3FD8 /* Semiring.swift in Sources */ = {isa = PBXBuildFile; fileRef = 83ECC5CF22121F2F008B3FD8 /* Semiring.swift */; };
@@ -204,6 +205,7 @@
 		83923AEF2210221B00EE4AB6 /* CGSize+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "CGSize+Extensions.swift"; sourceTree = "<group>"; };
 		83923AF2221026C400EE4AB6 /* LoadingComponent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingComponent.swift; sourceTree = "<group>"; };
 		83923AF422102E7E00EE4AB6 /* VisualEffectView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisualEffectView.swift; sourceTree = "<group>"; };
+		83D78AA82222D7250043A175 /* Function.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Function.swift; sourceTree = "<group>"; };
 		83ECC5C222121E3B008B3FD8 /* CoreTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CoreTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		83ECC5C622121E3B008B3FD8 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		83ECC5CD22121E5B008B3FD8 /* SemigroupLawTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SemigroupLawTests.swift; sourceTree = "<group>"; };
@@ -302,6 +304,7 @@
 				8365E146220383DD00074C21 /* Core.h */,
 				8365E162220383F500074C21 /* Applicative.swift */,
 				83ECC5D32212237C008B3FD8 /* Expectation.swift */,
+				83D78AA82222D7250043A175 /* Function.swift */,
 				8365E1672203841100074C21 /* Future.swift */,
 				8365E1662203841100074C21 /* Lens.swift */,
 				8365E16A2203841100074C21 /* Monoid.swift */,
@@ -737,6 +740,7 @@
 				83ECC5D2221220C9008B3FD8 /* Predicate.swift in Sources */,
 				8365E1722203841200074C21 /* Result.swift in Sources */,
 				8365E1732203841200074C21 /* Monoid.swift in Sources */,
+				83D78AA92222D7250043A175 /* Function.swift in Sources */,
 				83ECC5E82212935C008B3FD8 /* Decodable+Data.swift in Sources */,
 				8365E1742203841200074C21 /* Semigroup.swift in Sources */,
 				8365E1702203841200074C21 /* Future.swift in Sources */,

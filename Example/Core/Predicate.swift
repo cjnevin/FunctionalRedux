@@ -8,7 +8,7 @@
 
 import Foundation
 
-public typealias Predicate<A> = FunctionS<A, Bool>
+public typealias Predicate<A> = Function<A, Bool>
 
 public func || <A> (lhs: Predicate<A>, rhs: Predicate<A>) -> Predicate<A> {
     return lhs + rhs

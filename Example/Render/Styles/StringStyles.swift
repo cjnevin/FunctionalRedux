@@ -101,7 +101,7 @@ public final class DictionaryHolder<Key: Hashable, Value> {
     }
 }
 
-extension Style where T == StringAttributes {
+extension Style where A == StringAttributes, B == Void {
     public func text(_ text: String?) -> NSAttributedString {
         guard let text = text else { return .init() }
         let attr = StringAttributes()
